@@ -8,11 +8,14 @@ PROGRAM integrals
 ! TWO-ELECTRON is the two electron integral matrix
 ! --------------------------------------------------------------------------------------
 
+!call LAPACK functions
+EXTERNAL
 
 IMPLICIT NONE
 
 REAL(N,N) :: S, H, TWO_ELECTRON
 !N here will be the size of the matrices based on basis set
+!maybe 16x16
 
 
 
