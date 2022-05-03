@@ -9,4 +9,7 @@
 8. Transform Fock Matrix w/ X, F' = X_dag * F * X
 9. Diagonalize F'
 10. From F' obtain C' (density coefficient matrix) and epsilon (orbital energies)
-11. Form a new density matrix from C, using P = 2 * Sum_occupied[a_{\lambda i}* a_{\sigma j}]
+11. Form a new density matrix from C, using P = 2 * Sum_occupied[C_{\lambda i}* C_{\sigma j}]
+12. Determine convergence through element by element comparison of new and old density matrices, declare convergance based on pre-decided tolerance
+13. If not converged, return to step 6.
+14. If converged, good job, pull what you need from the density, fock, etc. matrices
