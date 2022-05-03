@@ -16,7 +16,7 @@ mf.verbose = 0
 mf.level_shift = .4
 en = mf.scf()
 
-output_loc = "/project/lgagliardi/ndohrmann/Desktop/M25510/PySCF_Comp/pyscf_out"
+output_loc = "<DIR>" # hidden for privacy 
 
 with open(output_loc,"w") as f:
     f.write(str(en))
