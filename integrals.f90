@@ -1,6 +1,6 @@
 PROGRAM integrals
 
-IMPLICT NONE
+IMPLICIT NONE
 
 
 
