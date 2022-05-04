@@ -4,4 +4,4 @@ This is a short comparison calculation using the cc-pVTZ basis set within the HF
 
 The file "pyscf_out" contains the reported energy of: -40.213360376289145 (hartree) 
 
-The Hartree-Fock limit energy of this system is -40.225, as reported in P.C. Hariharan and J. A. Pople, Theoret. Chem. Acta 28; 213 (1973)
+The estimated Hartree-Fock limit energy of this system is -40.225, as reported in P.C. Hariharan and J. A. Pople, Theoret. Chem. Acta 28; 213 (1973)
