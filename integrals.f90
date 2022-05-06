@@ -8,6 +8,14 @@ PROGRAM integrals
 ! TWO-ELECTRON is the two electron integral matrix
 ! --------------------------------------------------------------------------------------
 
+! --------------------------------------------------------------------------------------
+! Example of how the orbitals are parameterized: 
+!
+! s-Functions: g_1s(a,r) = (8a^3/\pi^3)^{1/4} exp{-ar^2}
+! p-Functions: g_2px(a,r) = (128a^5/\pi^3)^{1/4} x * exp{-ar^2}
+! d-functions: g_3dxy(a,r) = (2048a^7 / \pi^3)^{1/4} x * y * exp{-ar^2}
+! --------------------------------------------------------------------------------------
+
   !call LAPACK functions
   EXTERNAL
 
@@ -16,8 +24,9 @@ PROGRAM integrals
   REAL, DIMENSION(N,N) :: S, H, TWO_ELECTRON
   !N here will be the size of the matrices based on basis set
   !maybe 16x16
-
-
+  
+   
+   
 
 
 
