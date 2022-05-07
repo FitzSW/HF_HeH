@@ -14,7 +14,6 @@ Self-Consistent Field (SCF) procedure on methane that was optimized at the
 CCSD/aug-cc-pVTZ level of theory using Gaussian16. The HF procedure was
 performed using the cc-pVTZ basis set for C and H. 
 
-(6 may test edit from remote)
 
 ### References
 
