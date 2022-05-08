@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
 	inp.close();
 
 	// test print of the matrix
-	cout << "This is A:\n";
+	cout << "This is A (as array):\n";
 	for (int i = 0; i < n; ++i) {
 		for (int j = 0; j < m; ++j) {
 			cout << A[i][j] << " ";
@@ -66,6 +66,18 @@ int main(int argc, char** argv) {
 		cout << endl;
 
 	}
+
+	// test loading into Eigen
+	MatrixXd B(n,n);
+
+	for (int i = 0; i < n; ++i) {
+		for (int j = 0; j < n; ++j) {
+			B(i,j) = A[i][j];
+		}
+	}
+
+	cout << "This is B (eigen):\n";
+	cout << B << endl;
 
 	return 0;
 }

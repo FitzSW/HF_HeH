@@ -18,7 +18,7 @@ open(11, file="lines",status="unknown")
 read(11,*) n
 allocate(A(n,n))
 
-open(10, file="arr",status="unknown")
+open(10, file=csv_file,status="unknown")
 
 read (10,*) A
 A = transpose(A) ! must take the transpose to ensure that row-major ordering is done
