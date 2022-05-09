@@ -3,7 +3,7 @@ MENG 25510 - Final Project
 
 Univeristy of Chicago
 
-Sping 2022
+Spring 2022
 
 Primary Authors: Sullivan Fitz, Noah Dohrmann
 
@@ -12,8 +12,17 @@ Primary Authors: Sullivan Fitz, Noah Dohrmann
 This is a short project in Fortran90+ to perform the Hartree-Fock (HF)
 Self-Consistent Field (SCF) procedure on methane that was optimized at the
 CCSD/aug-cc-pVTZ level of theory using Gaussian16. The HF procedure was
-performed using the cc-pVTZ basis set for C and H. 
+performed using the *choose new basis set* basis set for C and H. The result
+of our code is then compared to both the PySCF energy for HF with the same
+basis set, as well as the higher-quality energy attained at CCSD/aug-cc-pVTZ.
 
+### Notes on Compatibility
+
+Some of the code in these files requires UNIX commands (eg. "wc" for counting
+file lines), and may not work if run without them.
+
+For linear algebra functionality, C++/Eigen is used, so it is assumed that you
+have a C++ compiler and it has access to the Eigen library header files.
 
 ### References
 

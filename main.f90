@@ -13,13 +13,29 @@ implicit none
 ! Matrix diagonalization
 ! Explicit functional forms of the basis functions
 
+! get name of the geometry file    
+character*40 geom
 
-call hf_main()
 
+call get_command_argument(1,geom)
+
+
+! The do-everything subroutine (pre-determined basis set)
+call hf_main(geom)
 
 end program main
 
-subroutine hf_main()
+subroutine hf_main(geom)
+    implicit none
+    character(len=1), dimension(4) :: atoms
+    real, dimension(4,3) :: coords
+    integer :: i
+
+    atoms(1) = "C"
+    do i = 2, 5
+        atoms(i) = "H"
+    enddo
+
     ! Calculate stored integrals
 
     ! Diagonalize S to obtain X
@@ -45,3 +61,5 @@ subroutine hf_main()
     ! Calculate expectation value of electronic energy
 
     ! Find total energy (+ Nuc) and print output
+
+end subroutine hf_main
