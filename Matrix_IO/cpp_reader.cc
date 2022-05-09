@@ -68,6 +68,8 @@ int main(int argc, char** argv) {
 	}
 
 	// test loading into Eigen
+	// (Can also load directly into Eigen from the in file stream,
+	//  which would have to be done first)
 	MatrixXd B(n,n);
 
 	for (int i = 0; i < n; ++i) {

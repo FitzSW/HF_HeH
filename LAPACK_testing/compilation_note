@@ -6,3 +6,6 @@ ff () {
 
 The path given above is system specific and will vary based on LAPACK
 installation. 
+
+Tutorial Link:
+https://cyber.dabamos.de/programming/modernfortran/lapack.html
