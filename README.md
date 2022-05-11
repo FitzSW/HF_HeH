@@ -67,6 +67,9 @@ Fox, D. J. Gaussian, Inc., Wallingford CT, 2016.
 J. Chem. Phys. 90, 1007 (1989); https://doi.org/10.1063/1.456153
 J. Chem. Phys. 103, 4572 (1995); https://doi.org/10.1063/1.470645
 
+#### Krishnan 6-311G Basis Set (He)
+J. Chem. Phys. 72, 650-654 (1980); https://doi.org/10.1063/1.438955
+
 #### BSE
 Pritchard, Benjamin P., Altarawy, Doaa, Didier, Brett, Gibsom, Tara
             D., Windus, Theresa L.

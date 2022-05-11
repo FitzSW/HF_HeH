@@ -2,6 +2,9 @@ program main
 !
 
 ! call in other modules that are relevant
+use orbitals
+use Gauss_Multiply
+use reader
 
 implicit none
 
@@ -13,28 +16,47 @@ implicit none
 ! Matrix diagonalization
 ! Explicit functional forms of the basis functions
 
-! get name of the geometry file    
+! get name of the geometry and basis file    
 character*40 geom
+character*40 basis
 
 
 call get_command_argument(1,geom)
-
+call get_command_argument(2,basis)
 
 ! The do-everything subroutine (pre-determined basis set)
-call hf_main(geom)
+call hf_main(geom,basis)
 
 end program main
 
-subroutine hf_main(geom)
+subroutine hf_main(geom,basis)
     implicit none
-    character(len=1), dimension(4) :: atoms
-    real, dimension(4,3) :: coords
+    character*80, intent(in) :: geom
+    character*80, intent(in) :: basis
     integer :: i
 
-    atoms(1) = "C"
-    do i = 2, 5
-        atoms(i) = "H"
-    enddo
+    type(contracted_gto), allocatable, dimension(:) :: orbs
+    real, allocatable, dimension(:,:) :: S
+    real, allocatable, dimension(:,:) :: X
+    real, allocatable, dimension(:,:) :: T
+    real, allocatable, dimension(:,:) :: V
+    real, allocatable, dimension(:,:) :: F
+    real, allocatable, dimension(:,:) :: F_prime
+    real, allocatable, dimension(:,:) :: G
+    real, allocatable, dimension(:,:) :: C
+    real, allocatable, dimension(:,:) :: C_prime
+
+    real :: electronic_energy
+    real :: nuclear_energy
+    real :: total_energy
+    character*80 :: output_file
+
+    ! initialize the system - ie. read in the geometry and basis set. 
+    ! The orbitals should be collected into  a vector of the 'contracted-
+    ! gto' derived type
+    call reader(geom,basis,orbs)
+
+
 
     ! Calculate stored integrals
 
@@ -61,5 +83,12 @@ subroutine hf_main(geom)
     ! Calculate expectation value of electronic energy
 
     ! Find total energy (+ Nuc) and print output
+    output_file = "hf_out.out"
+    open(unit=10,file=output_file,status="unknown")
+
+    write(*,*) "Converged Energy Values (Hartree):"
+    write(*,*) "Electronic Energy: ", electronic_energy
+    write(*,*) "Nuclear Rep. Energy: ", nuclear_energy
+    write(*,*) "Total Energy: ", total_energy
 
 end subroutine hf_main

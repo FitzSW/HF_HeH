@@ -44,7 +44,6 @@ function new_contraction(M,orb_type,atom_name,coords,coeff_vec,expo_vec)
     new_contraction%atom_name = atom_name
     new_contraction%coords = coords
 
-    ! call coefficient_expo_maker(new_contraction,coeff_vec,expo_vec)
 
     do i = 1, M
         new_contraction%contraction(i)%coeff = coeff_vec(i)
