@@ -14,6 +14,8 @@ MODULE integrals
 
           !import necessary modules
           USE constants, only : PI_16
+          
+          USE Gauss_Multiply
 
           IMPLICIT NONE
 
