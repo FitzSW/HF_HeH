@@ -1,4 +1,4 @@
-# Hartree-Fock Implementation: Methane
+# Hartree-Fock Implementation: Fortran90
 MENG 25510 - Final Project 
 
 Univeristy of Chicago
@@ -10,9 +10,9 @@ Primary Authors: Sullivan Fitz, Noah Dohrmann
 ### Scale of Project
 
 This is a short project in Fortran90+ to perform the Hartree-Fock (HF)
-Self-Consistent Field (SCF) procedure on methane that was optimized at the
+Self-Consistent Field (SCF) procedure on HeH+ that was optimized at the
 CCSD/aug-cc-pVTZ level of theory using Gaussian16. The HF procedure was
-performed using the *choose new basis set* basis set for C and H. The result
+performed using the 6-311G basis set for He and H. The result
 of our code is then compared to both the PySCF energy for HF with the same
 basis set, as well as the higher-quality energy attained at CCSD/aug-cc-pVTZ.
 
