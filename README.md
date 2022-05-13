@@ -1,7 +1,7 @@
 # Hartree-Fock Implementation: Fortran90
 MENG 25510 - Final Project 
 
-Univeristy of Chicago
+University of Chicago
 
 Spring 2022
 

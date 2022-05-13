@@ -15,6 +15,7 @@ subroutine reader(geom,basis,orbs)
     type(contracted_gto), allocatable, dimension(:) :: orbs
 
 
+
 end subroutine reader 
 
 

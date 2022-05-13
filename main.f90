@@ -57,7 +57,6 @@ subroutine hf_main(geom,basis)
     call reader(geom,basis,orbs)
 
 
-
     ! Calculate stored integrals
 
     ! Diagonalize S to obtain X
@@ -86,9 +85,9 @@ subroutine hf_main(geom,basis)
     output_file = "hf_out.out"
     open(unit=10,file=output_file,status="unknown")
 
-    write(*,*) "Converged Energy Values (Hartree):"
-    write(*,*) "Electronic Energy: ", electronic_energy
-    write(*,*) "Nuclear Rep. Energy: ", nuclear_energy
-    write(*,*) "Total Energy: ", total_energy
+    write(10,*) "Converged Energy Values (Hartree):"
+    write(10,f10.5) "Electronic Energy: ", electronic_energy
+    write(10,f10.f) "Nuclear Rep. Energy: ", nuclear_energy
+    write(10,f10.5) "Total Energy: ", total_energy
 
 end subroutine hf_main
