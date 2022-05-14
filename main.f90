@@ -55,7 +55,7 @@ subroutine hf_main(geom,basis)
     ! initialize the system - ie. read in the geometry and basis set. 
     ! The orbitals should be collected into  a vector of the 'contracted-
     ! gto' derived type
-    call reader(geom,basis,N,orbs)
+    call reader_sub(geom,basis,N,orbs)
 
 
     ! Calculate stored integrals

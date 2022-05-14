@@ -1,9 +1,9 @@
-program tester
-    ! just a  file that will be deleted when done
+module subs
+contains
+
+subroutine gto_tester()
     use orbitals
-
     implicit none
-
     character(len=1) :: orb_type
     character(len=1) :: atom_name
     real, dimension(3) :: coords
@@ -30,5 +30,42 @@ program tester
     do i = 1, M
         write (*,*) "Coef: ", A%contraction(i)%coeff, " Exp: ",A%contraction(i)%expo
     enddo
+
+end subroutine gto_tester
+
+subroutine reader_test(N,orbs)
+    use orbitals
+    use reader
+    implicit none
+
+    character*40 :: geom, basis
+    type(contracted_gto), allocatable, dimension(:) :: orbs
+    integer :: N
+
+    geom = "./Opt/heh_geom.xyz"
+    basis = "./Basis_Set/adapted_6-311G"
+
+    call reader_sub(geom,basis,N,orbs)
+
+
+end subroutine reader_test
+end module subs
+
+program tester
+    ! just a  file that will be deleted when done
+    use orbitals
+    use reader
+    use subs
+
+    implicit none
+
+    ! call gto_tester()
+
+    integer :: N
+    type(contracted_gto),allocatable,dimension(:) :: orbs
+
+    call reader_test(N,orbs)
+    call orbitals_printer(N,orbs)
+
 
 end program tester
