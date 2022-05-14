@@ -33,7 +33,8 @@ subroutine hf_main(geom,basis)
     implicit none
     character*80, intent(in) :: geom
     character*80, intent(in) :: basis
-    integer :: i
+    integer :: i ! A generic counter
+    integer :: N ! Number of orbitals
 
     type(contracted_gto), allocatable, dimension(:) :: orbs
     real, allocatable, dimension(:,:) :: S
@@ -54,7 +55,7 @@ subroutine hf_main(geom,basis)
     ! initialize the system - ie. read in the geometry and basis set. 
     ! The orbitals should be collected into  a vector of the 'contracted-
     ! gto' derived type
-    call reader(geom,basis,orbs)
+    call reader(geom,basis,N,orbs)
 
 
     ! Calculate stored integrals
@@ -86,6 +87,7 @@ subroutine hf_main(geom,basis)
     open(unit=10,file=output_file,status="unknown")
 
     write(10,*) "Converged Energy Values (Hartree):"
+    ! check the formatting 
     write(10,f10.5) "Electronic Energy: ", electronic_energy
     write(10,f10.f) "Nuclear Rep. Energy: ", nuclear_energy
     write(10,f10.5) "Total Energy: ", total_energy
