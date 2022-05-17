@@ -9,9 +9,6 @@ MODULE integrals
 ! --------------------------------------------------------------------------------------
   
 
-          !call LAPACK functions
-          EXTERNAL
-
           !import necessary modules
           USE constants, only : PI_16
           
@@ -32,38 +29,38 @@ MODULE integrals
 CONTAINS
         
         !--------------------------------
-        SUBROUTINE Overlap(G1,G2,PROD)
+        SUBROUTINE Overlap(alpha_a,alpha_b, R_a, R_b,O)
 
             IMPLICIT NONE
 
-            REAL, DIMENSION(N), intent(in) :: G1, G2
-            REAL, DIMENSION(N), intent(out) :: PROD
+            REAL, intent(in) :: alpha_a, alpha_b, R_a, R_b
+            REAL, intent(out) :: O
 
         END SUBROUTINE
         !--------------------------------
-        SUBROUTINE Kinetic(G1, G2, PROD)
+        SUBROUTINE Kinetic(alpha_a,alpha_b, R_a, R_b, K)
 
             IMPLICIT NONE
 
-            REAL, DIMENSION(N), intent(in) :: G1, G2
-            REAL, DIMENSION(N), intent(out) :: PROD
+            REAL, intent(in) :: alpha_a, alpha_b, R_a, R_b
+            REAL, intent(out) :: K
 
         END SUBROUTINE
         !--------------------------------
-        SUBROUTINE Potential(G1, G2, PROD)
+        SUBROUTINE Potential(alpha_a,alpha_b, R_a, R_b, P)
 
             IMPLICIT NONE
 
-            REAL, DIMENSION(N), intent(in) :: G1, G2
-            REAL, DIMENSION(N), intent(out) :: PROD
+            REAL, intent(in) :: alpha_a, alpha_b, R_a, R_b
+            REAL, intent(out) :: P
 
         END SUBROUTINE
         !--------------------------------
-        SUBROUTINE TWO_ELECTRON
+        SUBROUTINE TWO_ELECTRON(alpha_a,alpha_b, R_a, R_b, TE)
             IMPLICIT NONE
 
-            REAL, DIMENSION(N), intent(in) :: G1, G2
-            REAL, DIMENSION(N), intent(out) :: PROD
+            REAL, intent(in) :: alpha_a,alpha_b, R_a, R_b
+            REAL, intent(out) :: TE
 
         END SUBROUTINE
 
