@@ -7,15 +7,15 @@ Module Gauss
 
 CONTAINS
 
-        SUBROUTINE GAUSS_MULTIPLY(G1,G2,PROD)
+        SUBROUTINE GAUSS_MULTIPLY(alpha_a,alpha_b, R_a, R_b , alpha_new, R_new)
                 !Pass G1, G2 as a vector of necessary Gaussian Components (maybe?)
                 !Use Gaussian Product Theorem
 
                 IMPLICIT NONE
 
-                DOUBLE PRECISION, DIMENSION(N), intent(in) :: G1, G2
+                DOUBLE PRECISION,  intent(in) :: alpha_a, alpha_b, R_a, R_b
 
-                DOUBLE PRECISION, DIMENSION(N), intent(out) :: PROD
+                DOUBLE PRECISION,  intent(out) :: alpha_new, R_new
 
                 REAL :: gamma_, p 
 
