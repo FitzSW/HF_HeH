@@ -14,6 +14,8 @@ MODULE integrals
           
           USE Gauss_Multiply
 
+          USE F_0
+
           IMPLICIT NONE
 
           REAL, DIMENSION(N,N) :: S, H, TWO_ELECTRON
@@ -78,7 +80,7 @@ CONTAINS
             REAL, dimension(3), intent(in) :: R_a, R_b, R_c
             REAL, intent(out) :: V
             
-            REAL :: konstant, p
+            REAL :: konstant, p, t1
             REAL, dimension(3) :: R_p, vec_new
             
             CALL Gauss_Multiply(alpha_a, alpha_b, R_a, R_b, konstant, R_p, p)
@@ -88,11 +90,17 @@ CONTAINS
             
             IF (R_p.eq.R_c) THEN
             
-            V = 
+                V = (2*PI_16/p)*Z_c*konstant
             
             ELSE IF (R_p.ne.R_c) THEN
-            
-            V = 
+
+                vec_new = R_p - R_c
+
+                t1 = p*DOT_PRODUCT(vec_new,vec_new)
+                
+                V = (2*PI_16/p)*Z_c*konstant*Function_0(t1)
+
+            END IF
             
             
             
@@ -107,8 +115,8 @@ CONTAINS
             REAL, dimension(3), intent(in) :: R_a, R_b, R_c, R_d
             REAL, intent(out) :: TE
             
-            REAL :: konstant_p, konstant_q, p, q
-            REAL, dimension(3) :: R_p, R_q, vec_new1, vec_new2
+            REAL :: konstant_p, konstant_q, p, q, t1
+            REAL, dimension(3) :: R_p, R_q, vec_new
             !R_p is combined center of Gauss Product a,b; R_q is combined center of gauss product, c,d
             
             !multiply a,b
@@ -121,10 +129,20 @@ CONTAINS
             IF (R_p.eq.R_q) THEN
             
               !case one
+
+              TE = ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q
             
             ELSE IF (R_p.ne.R_q) THEN
             
               !case two
+
+              vec_new = R_p-R_q
+
+              t1 = ((p*q)/(p+q))*DOT_PRODUCT(vec_new,vec_new)
+
+              TE = ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q*Function_0(t1)
+
+            END IF
             
             
          
