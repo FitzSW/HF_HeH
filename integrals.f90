@@ -33,10 +33,12 @@ CONTAINS
 
             IMPLICIT NONE
 
-            REAL, intent(in) :: alpha_a, alpha_b, R_a, R_b
+            REAL, intent(in) :: alpha_a, alpha_b
+            REAL, dimension(3), intent(in) :: R_a, R_b
             REAL, intent(out) :: O
             
-            REAL :: prod, konstant, R_p, p
+            REAL :: konstant, p
+            REAL, dimension(3) :: R_p
             
             Call Gauss_Multiply(alpha_a, alpha_b, R_a, R_b, konstant, R_p, p)
             
@@ -48,8 +50,20 @@ CONTAINS
 
             IMPLICIT NONE
 
-            REAL, intent(in) :: alpha_a, alpha_b, R_a, R_b
+            REAL, intent(in) :: alpha_a, alpha_b
+            REAL, dimension(3), intent(in) :: R_a, R_b
             REAL, intent(out) :: K
+            
+            REAL :: konstant, p, pref
+            REAL, dimension(3) :: R_p, vec_new
+            
+            Call Gauss_Multiply(alpha_a, alpha_b, R_a, R_b, konstant, R_p, p)
+            
+            vec_new = R_a - R_b
+            
+            pref = (alpha_a*alpha_b/p)*(3-(2*alpha_a*alpha_b/p)*DOT_PRODUCT(vec_new, vec_new))
+            
+            K = pref * (PI_16/p)**(3/2) * konstant
 
         END SUBROUTINE
         !--------------------------------
