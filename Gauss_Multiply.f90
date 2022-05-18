@@ -7,7 +7,7 @@ Module Gauss
 
 CONTAINS
 
-        SUBROUTINE GAUSS_MULTIPLY(alpha_a,alpha_b, R_a, R_b , prod)
+        SUBROUTINE GAUSS_MULTIPLY(alpha_a,alpha_b, R_a, R_b , konstant, R_p, p)
                 !Takes exponent and centers of two primitive gaussians and returns the exponents, centers, and proportionality constant for their product
         
                 !currently unnormalized, but v. easy to add
