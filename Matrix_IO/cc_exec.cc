@@ -24,7 +24,7 @@ using namespace Eigen;
 int main(int argc, char** argv) { 
 
 	// file string names
-	std::string in_file = argv[1];
+	std::string in_file = "temp_file_1";
 	std::string out_file = "temp_file_2";
 
 	// file streams
@@ -32,8 +32,23 @@ int main(int argc, char** argv) {
 	std::ofstream out {out_file};
 
 	// Dimension of (square) matrix being read
-	char *p;
-	int n = (int)std::strtol(argv[2], &p, 10);
+	//
+	// Maybe just worth it to do it the long way through a 
+	// lines file? If the argv method does not work with the fortran 
+	// system command string being messed up
+	/* char *p; */
+	/* int n = (int)std::strtol(argv[2], &p, 10); */
+
+	int n;
+	std::string comm = "wc -l " + in_file + " > lines";
+	system(comm.c_str());
+
+	std::ifstream lines {"lines"};
+	lines >> n;
+
+	lines.close();
+	system("rm lines");
+
 
 	cout << "This is n " << n << endl;
 	

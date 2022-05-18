@@ -37,9 +37,9 @@ subroutine diagonalize(N,I,O)
 
     ! Should read temp_file_1, diagonalize it, and then write to temp
     ! file 2
-    say = trim("THIS IS N ")//trim(char(N))
+    ! say = trim("THIS IS N ")//trim(char(N))
     write(*,*) trim(say)
-    call execute_command_line(trim(comm))
+    call execute_command_line(trim(executable))
     
 
     ! read the output into matrix O
