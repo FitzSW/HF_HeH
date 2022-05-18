@@ -35,6 +35,12 @@ CONTAINS
 
             REAL, intent(in) :: alpha_a, alpha_b, R_a, R_b
             REAL, intent(out) :: O
+            
+            REAL :: prod, konstant, R_p, p
+            
+            Call Gauss_Multiply(alpha_a, alpha_b, R_a, R_b, konstant, R_p, p)
+            
+            O = (PI_16/p)**(3/2) * konstant
 
         END SUBROUTINE
         !--------------------------------
