@@ -1,6 +1,18 @@
 module subs
 contains
 
+! subroutine diag_tester()
+!     use diagonalizer
+!     implicit none
+!     integer, intent(in)              :: N
+!     real, dimension(N,N), intent(in) :: I 
+!     real, dimension(N,N), intent(in) :: O
+
+
+
+!     call diagonalize(N,I,O) 
+! end subroutine diag_tester
+
 subroutine gto_tester()
     use orbitals
     implicit none
@@ -56,16 +68,22 @@ program tester
     use orbitals
     use reader
     use subs
+    use diagonalizer
 
     implicit none
 
     ! call gto_tester()
 
-    integer :: N
+    integer                                       :: N
     type(contracted_gto),allocatable,dimension(:) :: orbs
+    real, allocatable, dimension(:,:)             :: O
+    real, dimension(2,2)                          :: I
 
-    call reader_test(N,orbs)
-    call orbitals_printer(N,orbs)
+    ! call reader_test(N,orbs)
+    ! call orbitals_printer(N,orbs)
+    N = 2
+    I = reshape((/ 1.0, 0.4508, 0.4508, 1.0 /),shape(I))
+    call diagonalize(N,I,O)
 
 
 end program tester

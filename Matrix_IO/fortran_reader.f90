@@ -40,7 +40,6 @@ subroutine print_matrix(A,n)
     real, dimension(n,n), intent(in) :: A
     integer :: i
 
-
     do i = 1, n
         write(*,*) A(i,:)
     enddo

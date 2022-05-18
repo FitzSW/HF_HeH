@@ -99,7 +99,8 @@ subroutine reader_sub(geom,basis,N,orbs)
         enddo
     enddo
 
-    write(*,*) "did not break, now test the data"
+    close(10)
+    close(11)
 
 
 end subroutine reader_sub 

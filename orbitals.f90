@@ -84,7 +84,7 @@ subroutine single_orb_printer(orb)
     write(*,*) ""
     write(*,*) ""
 
-    end subroutine single_orb_printer
+end subroutine single_orb_printer
 
 
 end module orbitals

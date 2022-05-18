@@ -17,8 +17,8 @@ implicit none
 ! Explicit functional forms of the basis functions
 
 ! get name of the geometry and basis file    
-character*40 geom
-character*40 basis
+character*80 geom
+character*80 basis
 
 
 call get_command_argument(1,geom)
@@ -31,12 +31,15 @@ end program main
 
 subroutine hf_main(geom,basis)
     implicit none
+
+    ! input 
     character*80, intent(in) :: geom
     character*80, intent(in) :: basis
+
+    ! intermediate
+    type(contracted_gto), allocatable, dimension(:) :: orbs
     integer :: i ! A generic counter
     integer :: N ! Number of orbitals
-
-    type(contracted_gto), allocatable, dimension(:) :: orbs
     real, allocatable, dimension(:,:) :: S
     real, allocatable, dimension(:,:) :: X
     real, allocatable, dimension(:,:) :: T
@@ -46,19 +49,21 @@ subroutine hf_main(geom,basis)
     real, allocatable, dimension(:,:) :: G
     real, allocatable, dimension(:,:) :: C
     real, allocatable, dimension(:,:) :: C_prime
+    real, allocatable, dimension(:,:,:) :: integrals ! A list of matrices
 
+    ! output (not returned by subroutine, but written to file)
     real :: electronic_energy
     real :: nuclear_energy
     real :: total_energy
     character*80 :: output_file
 
     ! initialize the system - ie. read in the geometry and basis set. 
-    ! The orbitals should be collected into  a vector of the 'contracted-
+    ! The orbitals should be collected into  a vector (called 'orbs') of the 'contracted-
     ! gto' derived type
     call reader_sub(geom,basis,N,orbs)
 
-
     ! Calculate stored integrals
+    call stored_integrals(N,orbs,integrals)
 
     ! Diagonalize S to obtain X
 
