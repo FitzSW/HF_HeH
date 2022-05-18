@@ -13,11 +13,17 @@ CONTAINS
                 !currently unnormalized, but v. easy to add
                 IMPLICIT NONE
 
-                DOUBLE PRECISION,  intent(in) :: alpha_a, alpha_b, R_a, R_b
+                DOUBLE PRECISION,  intent(in) :: alpha_a, alpha_b
+                
+                DOUBLE PRECISION, dimension(3), intent(in) :: R_a, R_b
 
-                DOUBLE PRECISION,  intent(out) :: konstant, R_p, p
+                DOUBLE PRECISION,  intent(out) :: konstant, p
+                
+                DOUBLE PRECISION, dimension(3), intent(out) :: R_p
 
-                REAL :: gamma_, vec_new, gauss_new
+                REAL :: gamma_
+                
+                REAL, dimension(3) :: vec_new
                 
                 
                 !define center of new gaussian
