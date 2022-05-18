@@ -12,11 +12,11 @@ type primitive_gto
 end type primitive_gto
 
 type contracted_gto
-    character(len=1) :: orb_type
-    character(len=2) :: atom_name
+    character(len=1)   :: orb_type
+    character(len=2)   :: atom_name
     real, dimension(3) :: coords ! coordinates
     ! length of the contraction 
-    integer :: M 
+    integer            :: M 
     ! The total number of primitives in the contraction
     type(primitive_gto), allocatable, dimension(:) :: contraction
 end type contracted_gto
@@ -25,16 +25,15 @@ contains
 !
 function new_contraction(M,orb_type,atom_name,coords,coeff_vec,expo_vec)
     implicit none
-    integer, intent(in) :: M
-    character(len=1), intent(in) :: orb_type ! should all be s
-    character(len=2), intent(in) :: atom_name
+    ! input
+    integer, intent(in)            :: M
+    character(len=1), intent(in)   :: orb_type ! should all be s
+    character(len=2), intent(in)   :: atom_name
     real, dimension(3), intent(in) :: coords
-    ! do these need to be allocatable?
-    real, dimension(M),intent(in) :: coeff_vec
-    real, dimension(M),intent(in) :: expo_vec
+    real, dimension(M),intent(in)  :: coeff_vec
+    real, dimension(M),intent(in)  :: expo_vec
 
-    integer :: i
-
+    integer              :: i
     type(contracted_gto) :: new_contraction
 
 
@@ -54,9 +53,9 @@ end function new_contraction
 
 subroutine orbitals_printer(N,orbs)
     implicit none
-    integer :: N
+    integer                            :: N
     type(contracted_gto), dimension(N) :: orbs
-    integer :: i
+    integer                            :: i
 
     write(*,*) "Printing ", N, "orbitals..."
     do i = 1, N
@@ -68,7 +67,7 @@ end subroutine orbitals_printer
 subroutine single_orb_printer(orb)
     implicit none
     type(contracted_gto) :: orb
-    integer :: M, i
+    integer              :: M, i
 
     M =  orb%M
 

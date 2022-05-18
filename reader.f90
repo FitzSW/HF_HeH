@@ -10,26 +10,30 @@ subroutine reader_sub(geom,basis,N,orbs)
     character*40, intent(in) :: basis
     
     ! intermediate
-    integer :: n_atoms, n_orbs
-    integer :: i, j, k ! counters
-    ! integer :: indexx
-    character*80 :: dummy_string
-    real :: dummy_real
-    real, allocatable, dimension(:,:) :: total_coords
+    integer                                :: n_atoms, n_orbs
+    integer                                :: i, j, k ! counters
+    character*80                           :: dummy_string
+    real                                   :: dummy_real
+    real, allocatable, dimension(:,:)      :: total_coords
     character*2, allocatable, dimension(:) :: atom_names
-    character*2 :: local_atom_name
-    character*2 :: local_orb_type
-    real, allocatable, dimension(:) :: local_coeff_vec
-    real, allocatable, dimension(:) :: local_expo_vec
-    type(contracted_gto) :: local_orbital
-    integer :: loc_N ! number of orbitals on current atom
-    integer :: loc_M ! local contraction length
-    integer :: orbital_index
+    character*2                            :: local_atom_name
+    character*2                            :: local_orb_type
+    real, allocatable, dimension(:)        :: local_coeff_vec
+    real, allocatable, dimension(:)        :: local_expo_vec
+    type(contracted_gto)                   :: local_orbital
+    ! number of orbitals on current atom
+    integer                                :: loc_N 
+    ! local contraction length
+    integer                                :: loc_M 
+    integer                                :: orbital_index
+
 
     ! output
     type(contracted_gto), allocatable, dimension(:) :: orbs
-    integer :: N ! numer of orbs
-    integer :: M ! length of the local contraction being read
+    ! numer of orbs
+    integer                                         :: N 
+    ! length of the local contraction being read
+    integer                                         :: M 
 
     ! Needs to account for both the length of the csv file (in orbs)
     ! as well as the length of each orbital (contraction length) 

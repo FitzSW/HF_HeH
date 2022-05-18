@@ -44,17 +44,17 @@ subroutine hf_main(geom,basis)
     real, allocatable, dimension(:,:) :: X
     real, allocatable, dimension(:,:) :: T
     real, allocatable, dimension(:,:) :: V
+    real, allocatable, dimension(:,:) :: TE ! Two electron
     real, allocatable, dimension(:,:) :: F
     real, allocatable, dimension(:,:) :: F_prime
     real, allocatable, dimension(:,:) :: G
     real, allocatable, dimension(:,:) :: C
     real, allocatable, dimension(:,:) :: C_prime
-    real, allocatable, dimension(:,:,:) :: integrals ! A list of matrices
 
     ! output (not returned by subroutine, but written to file)
-    real :: electronic_energy
-    real :: nuclear_energy
-    real :: total_energy
+    real         :: electronic_energy
+    real         :: nuclear_energy
+    real         :: total_energy
     character*80 :: output_file
 
     ! initialize the system - ie. read in the geometry and basis set. 
@@ -63,7 +63,7 @@ subroutine hf_main(geom,basis)
     call reader_sub(geom,basis,N,orbs)
 
     ! Calculate stored integrals
-    call stored_integrals(N,orbs,integrals)
+    call stored_integrals(N,orbs,S,T,V,TE)
 
     ! Diagonalize S to obtain X
 
