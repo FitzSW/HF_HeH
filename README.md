@@ -22,7 +22,10 @@ Some of the code in these files requires UNIX commands (eg. "wc" for counting
 file lines), and may not work if run without them.
 
 For linear algebra functionality, C++/Eigen is used, so it is assumed that you
-have a C++ compiler and it has access to the Eigen library header files.
+have a C++ compiler and it has access to the Eigen library header files. One should compile 
+the file Matrix_IO/cc_exec.cc to an executable called "cc_matrix_handler" which will be 
+called within the main program for finding transformation matrices.
+
 
 ### References
 
@@ -42,8 +45,6 @@ PySCF: the Python-based simulations of chemistry framework, Q. Sun, T. C.
 Berkelbach, N. S. Blunt, G. H. Booth, S. Guo, Z. Li, J. Liu, J. McClain, S.
 Sharma, S. Wouters, and G. K.-L. Chan, WIREs Comput. Mol. Sci. 8, e1340 (2018)
 
-Libcint: An efficient general integral library for Gaussian basis functions,
-Q. Sun, J. Comp. Chem. 36, 1664 (2015)
 
 #### Gaussian 16
 
