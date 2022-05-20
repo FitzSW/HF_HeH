@@ -90,3 +90,7 @@ Schuchardt, Karen L., Didier, Brett T., Elsethagen, Todd, Sun, Lisong,
     Basis Set Exchange: A Community Database for Computational Sciences
     J. Chem. Inf. Model. 47, 1045-1052 (2007)
     10.1021/ci600510j
+
+#### Avogadro
+
+https://avogadro.cc/
