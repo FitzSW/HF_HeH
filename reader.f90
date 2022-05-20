@@ -106,7 +106,6 @@ subroutine reader_sub(geom,basis,N,orbs)
     close(10)
     close(11)
 
-
 end subroutine reader_sub 
 
 

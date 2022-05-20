@@ -1,9 +1,9 @@
 Module Gauss
 
-        IMPLICIT NONE
 
         USE constants
 
+        IMPLICIT NONE
 
 CONTAINS
 

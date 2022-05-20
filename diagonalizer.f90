@@ -81,4 +81,22 @@ subroutine matrix_reader(N,O,file_name)
     O = transpose(O)
 end subroutine matrix_reader
 
+
+! look up if saying G = 0 is acceptable array notation in Fortran
+subroutine G_init(N,G)
+    implicit none
+    integer, intent(in)               :: N
+    real, allocatable, dimension(:,:) :: G
+    integer                           :: i, j
+
+    allocate(G(N,N))
+    do i = 1, N
+        do j = 1, N
+            G(i,j) = 0.0
+        enddo
+    enddo
+end subroutine G_init
+
+
+
 end module diagonalizer

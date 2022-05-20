@@ -5,7 +5,7 @@ program main
 use orbitals
 use Gauss_Multiply
 use reader
-
+use diagonalizer
 implicit none
 
 ! Needed functionalities:
@@ -63,15 +63,22 @@ subroutine hf_main(geom,basis)
     call reader_sub(geom,basis,N,orbs)
 
     ! Calculate stored integrals
+    ! (change this to whatever you'd like, its just a place holder)
     call stored_integrals(N,orbs,S,T,V,TE)
 
     ! Diagonalize S to obtain X
+    call diagonalize(N,S,X)
 
-    ! Generate guess at density matrix
+    ! Generate guess at density matrix - initial guess is G = zero
+    call G_init(N,G) ! lives in the diagonalizer module
+    goto 11
 
-    ! Calculate G matrix 
+    10 continue ! use this as a checkpoint for the loop
+    ! Calculate G matrix  (in loop) - want to skip this portion the first time, going 
+    ! to labeled line 11
 
     ! Find F = T + V + G
+    11 continue
 
     ! Transform the Fock matrix  to F'
 
@@ -81,11 +88,14 @@ subroutine hf_main(geom,basis)
 
     ! Form new density matrix P from C 
 
-    ! Determine convergence
+    ! Determine convergence - if not then go back to 10
+    if (.true.) then
+        goto 10
+    endif
 
-    ! Repeat or print out the converged matrix  
+    ! Print out the converged matrix  
 
-    ! Calculate expectation value of electronic energy
+    ! Calculate expectation value of electronic energy frim matrix values
 
     ! Find total energy (+ Nuc) and print output
     output_file = "hf_out.out"
