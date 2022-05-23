@@ -38,6 +38,8 @@
 \newcommand{\rbar}{\right|}
 \newcommand{\lbr}{\left<}
 \newcommand{\rbr}{\right>}
+\usepackage{fontspec}
+\newfontfamily\code{Courier New}
 \usepackage{graphicx}% Include figure files
 \usepackage{dcolumn}% Align table columns on decimal point
 \usepackage{bm}% bold math
@@ -101,8 +103,8 @@ algorithms are given.
 
 \subsection{Program Control Flow} 
 First, the input geometry and basis set files are read into the main program
-(``main.f90''), which are then used to construct a 1D array of the
-``orbitals'' derived type (written in ``orbitals.f90''), which each include
+({\code main.f90}), which are then used to construct a 1D array of the
+``orbitals'' derived type (written in {\code orbitals.f90}), which each include
 the name of its host atom, the orbital angular momentum type (e.g. ``s''), the
 coordinates of the host atom, the length of the contraction, as well as arrays
 of coefficients and exponential factors for the contraction.
@@ -125,7 +127,21 @@ eigenvalues and eigenvectors of matrices at each cycle of the SCF procedure.
 
 \section{Use and Installation}
 In order to run our code, please clone the git repository that is linked in
-the abstract of this document. Then, run the command: 
+the abstract of this document. These instructions will assume that you are
+on a *nix system and have {\code gfortran} and a C++ compiler such as 
+{\code clang} that has access to the Eigen header files. Then, inside the
+cloned directory, run the command: 
+%
+$$ \text{{\code test}} $$
+to build and execute the project. The results of the SCF procedure will be
+written to file in {\code hf\_out.out}.
+
+\section{Results and Discussion}
+
+
+\section{Conclusion}
+
+
 
 
 % \nocite{*}

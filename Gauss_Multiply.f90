@@ -1,4 +1,4 @@
-Module Gauss
+Module Gauss_Multiply
 
 
         USE constants
@@ -44,4 +44,4 @@ CONTAINS
 
         END SUBROUTINE
 
-END MODULE Gauss       
+END MODULE Gauss_Multiply
