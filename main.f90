@@ -3,7 +3,7 @@ program main
 
 ! call in other modules that are relevant
 use orbitals
-use Gauss_Multiply
+! use Gauss_Multiply
 use reader
 use diagonalizer
 implicit none
@@ -82,7 +82,7 @@ subroutine hf_main(geom,basis)
 
     ! Transform the Fock matrix  to F'
 
-    ! Diagonalize F' to obtain C' and epsilon
+    ! Diagonalize (find eigvecs, vals) F' to obtain C' and epsilon
 
     ! Find C = X C' 
 

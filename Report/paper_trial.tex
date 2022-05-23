@@ -48,6 +48,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{mathptmx}
 \usepackage{etoolbox}
+% \usepackage{cite}
 
 %% Apr 2021: AIP requests that the corresponding 
 %% email to be moved after the affiliations
@@ -88,11 +89,46 @@ final coding project, for which we chose to implement the Hartree-Fock (HF)
 Self-Consistent Field (SCF) method on a HeH$^{+}$ molecular system using the
 6-311G basis set on both atoms. The geometry at which we performed the
 calculation was optimized at the CCSD/aug-cc-pZTZ level of theory using
-Gaussian 16.
+Gaussian 16\cite{g16}. The result of our code is then compared to an energy
+found with
+PySCF\cite{sun2020recent,https://doi.org/10.1002/wcms.1340,https://doi.org/10.1002/jcc.23981}
+using the same geometry and basis set.
 
+\section{Hartree-Fock Algorithm and Code Details}
+We closely follow the suggested implementation scheme given in Szabo and
+Ostlund\cite{szabo2012modern}, in which explicit formulas and matrix
+algorithms are given.  
+
+\subsection{Program Control Flow} 
+First, the input geometry and basis set files are read into the main program
+(``main.f90''), which are then used to construct a 1D array of the
+``orbitals'' derived type (written in ``orbitals.f90''), which each include
+the name of its host atom, the orbital angular momentum type (e.g. ``s''), the
+coordinates of the host atom, the length of the contraction, as well as arrays
+of coefficients and exponential factors for the contraction.
+
+From here, we then calculate the stored integrals to populate the matrices 
+$\bold{S}$, $\bold{T}$, $\left\{\bold{V}^{\text{nuc.}}\right\}$, and $\bold{TE}$,
+with the last representing the two-electron integrals. The eigenvalue problem
+that we are trying to solve is recommended to be handled via a transformation
+to a set of orthogonalized orbitals via a matrix $\bold{X}$ obtained from 
+the \emph{symmetric orthogonalization} scheme
+%
+\begin{equation}
+\bold{X} = \bold{S}^{1/2}
+\end{equation}
+%
+The necessary matrix computations are done with assistance from the C++
+numerics library Eigen\cite{eigenweb}, which is also later used to find the 
+eigenvalues and eigenvectors of matrices at each cycle of the SCF procedure.
+
+
+\section{Use and Installation}
+In order to run our code, please clone the git repository that is linked in
+the abstract of this document. Then, run the command: 
 
 
 % \nocite{*}
-% \bibliography{../RSC}
+\bibliography{sources}
 
 \end{document}

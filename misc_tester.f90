@@ -9,7 +9,6 @@ contains
 !     real, dimension(N,N), intent(in) :: O
 
 
-
 !     call diagonalize(N,I,O) 
 ! end subroutine diag_tester
 

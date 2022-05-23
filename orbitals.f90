@@ -59,21 +59,23 @@ subroutine orbitals_printer(N,orbs)
 
     write(*,*) "Printing ", N, "orbitals..."
     do i = 1, N
-        write(*,*) "Oribtal: ", i
+        write(*,*) "Orbital: ", i
         call single_orb_printer(orbs(i))
     enddo
 end subroutine orbitals_printer
 
 subroutine single_orb_printer(orb)
     implicit none
-    type(contracted_gto) :: orb
-    integer              :: M, i
+    type(contracted_gto), intent(in) :: orb
+    integer                          :: M, i
 
+    ! Length of Contraction
     M =  orb%M
 
     write(*,*) "Atom: ", orb%atom_name
     write(*,*) "Orb Type: ", orb%orb_type
     write(*,*) "Coords: ", orb%coords
+    write(*,*) "Contraction Length: ", M
     write(*,*) "  Coeffs           Exponents"
 
     do i = 1, M

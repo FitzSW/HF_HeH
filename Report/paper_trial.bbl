@@ -1,0 +1,226 @@
+%merlin.mbs aipnum4-1.bst 2010-07-25 4.21a (PWD, AO, DPC) hacked
+%Control: key (0)
+%Control: author (8) initials jnrlst
+%Control: editor formatted (1) identically to author
+%Control: production of article title (0) allowed
+%Control: page (1) range
+%Control: year (1) truncated
+%Control: production of eprint (0) enabled
+\begin{thebibliography}{6}%
+\makeatletter
+\providecommand \@ifxundefined [1]{%
+ \@ifx{#1\undefined}
+}%
+\providecommand \@ifnum [1]{%
+ \ifnum #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+ \fi
+}%
+\providecommand \@ifx [1]{%
+ \ifx #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+ \fi
+}%
+\providecommand \natexlab [1]{#1}%
+\providecommand \enquote  [1]{``#1''}%
+\providecommand \bibnamefont  [1]{#1}%
+\providecommand \bibfnamefont [1]{#1}%
+\providecommand \citenamefont [1]{#1}%
+\providecommand \href@noop [0]{\@secondoftwo}%
+\providecommand \href [0]{\begingroup \@sanitize@url \@href}%
+\providecommand \@href[1]{\@@startlink{#1}\@@href}%
+\providecommand \@@href[1]{\endgroup#1\@@endlink}%
+\providecommand \@sanitize@url [0]{\catcode `\\12\catcode `\$12\catcode
+  `\&12\catcode `\#12\catcode `\^12\catcode `\_12\catcode `\%12\relax}%
+\providecommand \@@startlink[1]{}%
+\providecommand \@@endlink[0]{}%
+\providecommand \url  [0]{\begingroup\@sanitize@url \@url }%
+\providecommand \@url [1]{\endgroup\@href {#1}{\urlprefix }}%
+\providecommand \urlprefix  [0]{URL }%
+\providecommand \Eprint [0]{\href }%
+\providecommand \doibase [0]{http://dx.doi.org/}%
+\providecommand \selectlanguage [0]{\@gobble}%
+\providecommand \bibinfo  [0]{\@secondoftwo}%
+\providecommand \bibfield  [0]{\@secondoftwo}%
+\providecommand \translation [1]{[#1]}%
+\providecommand \BibitemOpen [0]{}%
+\providecommand \bibitemStop [0]{}%
+\providecommand \bibitemNoStop [0]{.\EOS\space}%
+\providecommand \EOS [0]{\spacefactor3000\relax}%
+\providecommand \BibitemShut  [1]{\csname bibitem#1\endcsname}%
+\let\auto@bib@innerbib\@empty
+%</preamble>
+\bibitem [{\citenamefont {Frisch}\ \emph {et~al.}(2016)\citenamefont {Frisch},
+  \citenamefont {Trucks}, \citenamefont {Schlegel}, \citenamefont {Scuseria},
+  \citenamefont {Robb}, \citenamefont {Cheeseman}, \citenamefont {Scalmani},
+  \citenamefont {Barone}, \citenamefont {Petersson}, \citenamefont {Nakatsuji},
+  \citenamefont {Li}, \citenamefont {Caricato}, \citenamefont {Marenich},
+  \citenamefont {Bloino}, \citenamefont {Janesko}, \citenamefont {Gomperts},
+  \citenamefont {Mennucci}, \citenamefont {Hratchian}, \citenamefont {Ortiz},
+  \citenamefont {Izmaylov}, \citenamefont {Sonnenberg}, \citenamefont
+  {Williams-Young}, \citenamefont {Ding}, \citenamefont {Lipparini},
+  \citenamefont {Egidi}, \citenamefont {Goings}, \citenamefont {Peng},
+  \citenamefont {Petrone}, \citenamefont {Henderson}, \citenamefont
+  {Ranasinghe}, \citenamefont {Zakrzewski}, \citenamefont {Gao}, \citenamefont
+  {Rega}, \citenamefont {Zheng}, \citenamefont {Liang}, \citenamefont {Hada},
+  \citenamefont {Ehara}, \citenamefont {Toyota}, \citenamefont {Fukuda},
+  \citenamefont {Hasegawa}, \citenamefont {Ishida}, \citenamefont {Nakajima},
+  \citenamefont {Honda}, \citenamefont {Kitao}, \citenamefont {Nakai},
+  \citenamefont {Vreven}, \citenamefont {Throssell}, \citenamefont
+  {Montgomery}, \citenamefont {Peralta}, \citenamefont {Ogliaro}, \citenamefont
+  {Bearpark}, \citenamefont {Heyd}, \citenamefont {Brothers}, \citenamefont
+  {Kudin}, \citenamefont {Staroverov}, \citenamefont {Keith}, \citenamefont
+  {Kobayashi}, \citenamefont {Normand}, \citenamefont {Raghavachari},
+  \citenamefont {Rendell}, \citenamefont {Burant}, \citenamefont {Iyengar},
+  \citenamefont {Tomasi}, \citenamefont {Cossi}, \citenamefont {Millam},
+  \citenamefont {Klene}, \citenamefont {Adamo}, \citenamefont {Cammi},
+  \citenamefont {Ochterski}, \citenamefont {Martin}, \citenamefont {Morokuma},
+  \citenamefont {Farkas}, \citenamefont {Foresman},\ and\ \citenamefont
+  {Fox}}]{g16}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.~J.}\ \bibnamefont
+  {Frisch}}, \bibinfo {author} {\bibfnamefont {G.~W.}\ \bibnamefont {Trucks}},
+  \bibinfo {author} {\bibfnamefont {H.~B.}\ \bibnamefont {Schlegel}}, \bibinfo
+  {author} {\bibfnamefont {G.~E.}\ \bibnamefont {Scuseria}}, \bibinfo {author}
+  {\bibfnamefont {M.~A.}\ \bibnamefont {Robb}}, \bibinfo {author}
+  {\bibfnamefont {J.~R.}\ \bibnamefont {Cheeseman}}, \bibinfo {author}
+  {\bibfnamefont {G.}~\bibnamefont {Scalmani}}, \bibinfo {author}
+  {\bibfnamefont {V.}~\bibnamefont {Barone}}, \bibinfo {author} {\bibfnamefont
+  {G.~A.}\ \bibnamefont {Petersson}}, \bibinfo {author} {\bibfnamefont
+  {H.}~\bibnamefont {Nakatsuji}}, \bibinfo {author} {\bibfnamefont
+  {X.}~\bibnamefont {Li}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
+  {Caricato}}, \bibinfo {author} {\bibfnamefont {A.~V.}\ \bibnamefont
+  {Marenich}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Bloino}},
+  \bibinfo {author} {\bibfnamefont {B.~G.}\ \bibnamefont {Janesko}}, \bibinfo
+  {author} {\bibfnamefont {R.}~\bibnamefont {Gomperts}}, \bibinfo {author}
+  {\bibfnamefont {B.}~\bibnamefont {Mennucci}}, \bibinfo {author}
+  {\bibfnamefont {H.~P.}\ \bibnamefont {Hratchian}}, \bibinfo {author}
+  {\bibfnamefont {J.~V.}\ \bibnamefont {Ortiz}}, \bibinfo {author}
+  {\bibfnamefont {A.~F.}\ \bibnamefont {Izmaylov}}, \bibinfo {author}
+  {\bibfnamefont {J.~L.}\ \bibnamefont {Sonnenberg}}, \bibinfo {author}
+  {\bibfnamefont {D.}~\bibnamefont {Williams-Young}}, \bibinfo {author}
+  {\bibfnamefont {F.}~\bibnamefont {Ding}}, \bibinfo {author} {\bibfnamefont
+  {F.}~\bibnamefont {Lipparini}}, \bibinfo {author} {\bibfnamefont
+  {F.}~\bibnamefont {Egidi}}, \bibinfo {author} {\bibfnamefont
+  {J.}~\bibnamefont {Goings}}, \bibinfo {author} {\bibfnamefont
+  {B.}~\bibnamefont {Peng}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Petrone}}, \bibinfo {author} {\bibfnamefont {T.}~\bibnamefont {Henderson}},
+  \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Ranasinghe}}, \bibinfo
+  {author} {\bibfnamefont {V.~G.}\ \bibnamefont {Zakrzewski}}, \bibinfo
+  {author} {\bibfnamefont {J.}~\bibnamefont {Gao}}, \bibinfo {author}
+  {\bibfnamefont {N.}~\bibnamefont {Rega}}, \bibinfo {author} {\bibfnamefont
+  {G.}~\bibnamefont {Zheng}}, \bibinfo {author} {\bibfnamefont
+  {W.}~\bibnamefont {Liang}}, \bibinfo {author} {\bibfnamefont
+  {M.}~\bibnamefont {Hada}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
+  {Ehara}}, \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Toyota}},
+  \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Fukuda}}, \bibinfo
+  {author} {\bibfnamefont {J.}~\bibnamefont {Hasegawa}}, \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Ishida}}, \bibinfo {author} {\bibfnamefont
+  {T.}~\bibnamefont {Nakajima}}, \bibinfo {author} {\bibfnamefont
+  {Y.}~\bibnamefont {Honda}}, \bibinfo {author} {\bibfnamefont
+  {O.}~\bibnamefont {Kitao}}, \bibinfo {author} {\bibfnamefont
+  {H.}~\bibnamefont {Nakai}}, \bibinfo {author} {\bibfnamefont
+  {T.}~\bibnamefont {Vreven}}, \bibinfo {author} {\bibfnamefont
+  {K.}~\bibnamefont {Throssell}}, \bibinfo {author} {\bibfnamefont {J.~A.}\
+  \bibnamefont {Montgomery}, \bibfnamefont {{Jr.}}}, \bibinfo {author}
+  {\bibfnamefont {J.~E.}\ \bibnamefont {Peralta}}, \bibinfo {author}
+  {\bibfnamefont {F.}~\bibnamefont {Ogliaro}}, \bibinfo {author} {\bibfnamefont
+  {M.~J.}\ \bibnamefont {Bearpark}}, \bibinfo {author} {\bibfnamefont {J.~J.}\
+  \bibnamefont {Heyd}}, \bibinfo {author} {\bibfnamefont {E.~N.}\ \bibnamefont
+  {Brothers}}, \bibinfo {author} {\bibfnamefont {K.~N.}\ \bibnamefont {Kudin}},
+  \bibinfo {author} {\bibfnamefont {V.~N.}\ \bibnamefont {Staroverov}},
+  \bibinfo {author} {\bibfnamefont {T.~A.}\ \bibnamefont {Keith}}, \bibinfo
+  {author} {\bibfnamefont {R.}~\bibnamefont {Kobayashi}}, \bibinfo {author}
+  {\bibfnamefont {J.}~\bibnamefont {Normand}}, \bibinfo {author} {\bibfnamefont
+  {K.}~\bibnamefont {Raghavachari}}, \bibinfo {author} {\bibfnamefont {A.~P.}\
+  \bibnamefont {Rendell}}, \bibinfo {author} {\bibfnamefont {J.~C.}\
+  \bibnamefont {Burant}}, \bibinfo {author} {\bibfnamefont {S.~S.}\
+  \bibnamefont {Iyengar}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
+  {Tomasi}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Cossi}},
+  \bibinfo {author} {\bibfnamefont {J.~M.}\ \bibnamefont {Millam}}, \bibinfo
+  {author} {\bibfnamefont {M.}~\bibnamefont {Klene}}, \bibinfo {author}
+  {\bibfnamefont {C.}~\bibnamefont {Adamo}}, \bibinfo {author} {\bibfnamefont
+  {R.}~\bibnamefont {Cammi}}, \bibinfo {author} {\bibfnamefont {J.~W.}\
+  \bibnamefont {Ochterski}}, \bibinfo {author} {\bibfnamefont {R.~L.}\
+  \bibnamefont {Martin}}, \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Morokuma}}, \bibinfo {author} {\bibfnamefont {O.}~\bibnamefont {Farkas}},
+  \bibinfo {author} {\bibfnamefont {J.~B.}\ \bibnamefont {Foresman}}, \ and\
+  \bibinfo {author} {\bibfnamefont {D.~J.}\ \bibnamefont {Fox}},\ }\href@noop
+  {} {\enquote {\bibinfo {title} {Gaussian˜16 {R}evision {C}.01},}\ }
+  (\bibinfo {year} {2016}),\ \bibinfo {note} {gaussian Inc. Wallingford
+  CT}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Sun}\ \emph {et~al.}(2020)\citenamefont {Sun},
+  \citenamefont {Zhang}, \citenamefont {Banerjee}, \citenamefont {Bao},
+  \citenamefont {Barbry}, \citenamefont {Blunt}, \citenamefont {Bogdanov},
+  \citenamefont {Booth}, \citenamefont {Chen}, \citenamefont {Cui} \emph
+  {et~al.}}]{sun2020recent}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Q.}~\bibnamefont
+  {Sun}}, \bibinfo {author} {\bibfnamefont {X.}~\bibnamefont {Zhang}}, \bibinfo
+  {author} {\bibfnamefont {S.}~\bibnamefont {Banerjee}}, \bibinfo {author}
+  {\bibfnamefont {P.}~\bibnamefont {Bao}}, \bibinfo {author} {\bibfnamefont
+  {M.}~\bibnamefont {Barbry}}, \bibinfo {author} {\bibfnamefont {N.~S.}\
+  \bibnamefont {Blunt}}, \bibinfo {author} {\bibfnamefont {N.~A.}\ \bibnamefont
+  {Bogdanov}}, \bibinfo {author} {\bibfnamefont {G.~H.}\ \bibnamefont {Booth}},
+  \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Chen}}, \bibinfo {author}
+  {\bibfnamefont {Z.-H.}\ \bibnamefont {Cui}},  \emph {et~al.},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {Recent developments in the pyscf program
+  package},}\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {J.
+  Chem. Phys.}\ }\textbf {\bibinfo {volume} {153}},\ \bibinfo {pages} {024109}
+  (\bibinfo {year} {2020})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Sun}\ \emph {et~al.}(2018)\citenamefont {Sun},
+  \citenamefont {Berkelbach}, \citenamefont {Blunt}, \citenamefont {Booth},
+  \citenamefont {Guo}, \citenamefont {Li}, \citenamefont {Liu}, \citenamefont
+  {McClain}, \citenamefont {Sayfutyarova}, \citenamefont {Sharma},
+  \citenamefont {Wouters},\ and\ \citenamefont
+  {Chan}}]{https://doi.org/10.1002/wcms.1340}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Q.}~\bibnamefont
+  {Sun}}, \bibinfo {author} {\bibfnamefont {T.~C.}\ \bibnamefont {Berkelbach}},
+  \bibinfo {author} {\bibfnamefont {N.~S.}\ \bibnamefont {Blunt}}, \bibinfo
+  {author} {\bibfnamefont {G.~H.}\ \bibnamefont {Booth}}, \bibinfo {author}
+  {\bibfnamefont {S.}~\bibnamefont {Guo}}, \bibinfo {author} {\bibfnamefont
+  {Z.}~\bibnamefont {Li}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
+  {Liu}}, \bibinfo {author} {\bibfnamefont {J.~D.}\ \bibnamefont {McClain}},
+  \bibinfo {author} {\bibfnamefont {E.~R.}\ \bibnamefont {Sayfutyarova}},
+  \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Sharma}}, \bibinfo
+  {author} {\bibfnamefont {S.}~\bibnamefont {Wouters}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {G.~K.-L.}\ \bibnamefont {Chan}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {Pyscf: the python-based simulations of
+  chemistry framework},}\ }\href {\doibase https://doi.org/10.1002/wcms.1340}
+  {\bibfield  {journal} {\bibinfo  {journal} {WIREs Comput. Mol. Sci.}\
+  }\textbf {\bibinfo {volume} {8}},\ \bibinfo {pages} {e1340} (\bibinfo {year}
+  {2018})},\ \Eprint
+  {http://arxiv.org/abs/https://wires.onlinelibrary.wiley.com/doi/pdf/10.1002/wcms.1340}
+  {https://wires.onlinelibrary.wiley.com/doi/pdf/10.1002/wcms.1340}
+  \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Sun}(2015)}]{https://doi.org/10.1002/jcc.23981}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Q.}~\bibnamefont
+  {Sun}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Libcint: An
+  efficient general integral library for gaussian basis functions},}\ }\href
+  {\doibase https://doi.org/10.1002/jcc.23981} {\bibfield  {journal} {\bibinfo
+  {journal} {J. Comp. Chem.}\ }\textbf {\bibinfo {volume} {36}},\ \bibinfo
+  {pages} {1664--1671} (\bibinfo {year} {2015})},\ \Eprint
+  {http://arxiv.org/abs/https://onlinelibrary.wiley.com/doi/pdf/10.1002/jcc.23981}
+  {https://onlinelibrary.wiley.com/doi/pdf/10.1002/jcc.23981} \BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Szabo}\ and\ \citenamefont
+  {Ostlund}(2012)}]{szabo2012modern}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Szabo}}\ and\ \bibinfo {author} {\bibfnamefont {N.~S.}\ \bibnamefont
+  {Ostlund}},\ }\href@noop {} {\emph {\bibinfo {title} {Modern quantum
+  chemistry: introduction to advanced electronic structure theory}}}\ (\bibinfo
+   {publisher} {Courier Corporation},\ \bibinfo {year} {2012})\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Guennebaud}, \citenamefont {Jacob}\ \emph
+  {et~al.}(2010)\citenamefont {Guennebaud}, \citenamefont {Jacob} \emph
+  {et~al.}}]{eigenweb}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Guennebaud}}, \bibinfo {author} {\bibfnamefont {B.}~\bibnamefont {Jacob}},
+  \emph {et~al.},\ }\href@noop {} {\enquote {\bibinfo {title} {Eigen v3},}\
+  }\bibinfo {howpublished} {http://eigen.tuxfamily.org} (\bibinfo {year}
+  {2010})\BibitemShut {NoStop}%
+\end{thebibliography}%
