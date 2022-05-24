@@ -75,14 +75,16 @@ program tester
 
     integer                                       :: N
     type(contracted_gto),allocatable,dimension(:) :: orbs
-    real, allocatable, dimension(:,:)             :: O
+    real, dimension(2,2)                          :: O
     real, dimension(2,2)                          :: I
+    real, dimension(2,2)                          :: E
 
     ! call reader_test(N,orbs)
     ! call orbitals_printer(N,orbs)
     N = 2
-    I = reshape((/ 1.0, 0.4508, 0.4508, 1.0 /),shape(I))
-    call diagonalize(N,I,O)
+    ! allocate(O(2,2))
+    I = reshape((/ -2.4397, -0.5158, -0.5158, -1.5387 /),shape(I))
+    call eigen_finder(N,I,O,E)
 
 
 end program tester

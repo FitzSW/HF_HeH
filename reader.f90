@@ -39,7 +39,6 @@ subroutine reader_sub(geom,basis,N,orbs)
     ! as well as the length of each orbital (contraction length) 
 
     open(unit=10,file=geom,access='sequential',status='unknown')
-    ! open(unit=11,file=basis,access='sequential',status='unknown')
 
     ! first read in the geometry
     read (10,*) n_atoms
@@ -62,12 +61,13 @@ subroutine reader_sub(geom,basis,N,orbs)
     
     ! Now we have the atom names and coordinates!
     open(unit=11,file=basis,access="sequential",status="unknown")
-    read (11,*)  n_orbs ! 6
+    read (11,*)  n_orbs ! 6 in the adapted basis set file
     N = n_orbs
 
     ! allocate the orbital vector
     allocate(orbs(n_orbs))
 
+    ! Track which orbital we are on
     orbital_index = 1
 
     do i = 1, n_atoms
@@ -98,6 +98,7 @@ subroutine reader_sub(geom,basis,N,orbs)
             deallocate(local_expo_vec)
 
             orbs(orbital_index) = local_orbital
+            ! update the orbital index
             orbital_index = orbital_index + 1
 
         enddo
@@ -107,6 +108,5 @@ subroutine reader_sub(geom,basis,N,orbs)
     close(11)
 
 end subroutine reader_sub 
-
 
 end module reader

@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
 	system("rm lines");
 
 
-	cout << "This is n " << n << endl;
+	/* cout << "This is n " << n << endl; */
 	
 	double A[n][n];
 	MatrixXd B(n,n);

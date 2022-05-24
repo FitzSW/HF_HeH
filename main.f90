@@ -42,14 +42,19 @@ subroutine hf_main(geom,basis)
     integer :: N ! Number of orbitals
     real, allocatable, dimension(:,:) :: S
     real, allocatable, dimension(:,:) :: X
+    real, allocatable, dimension(:,:) :: X_herm
     real, allocatable, dimension(:,:) :: T
-    real, allocatable, dimension(:,:) :: V
+    real, allocatable, dimension(:,:) :: V_H
+    real, allocatable, dimension(:,:) :: V_He
+    real, allocatable, dimension(:,:) :: H_core
     real, allocatable, dimension(:,:) :: TE ! Two electron
     real, allocatable, dimension(:,:) :: F
     real, allocatable, dimension(:,:) :: F_prime
     real, allocatable, dimension(:,:) :: G
+    real, allocatable, dimension(:,:) :: P
     real, allocatable, dimension(:,:) :: C
     real, allocatable, dimension(:,:) :: C_prime
+    real, allocatable, dimension(:,:) :: Ep
 
     ! output (not returned by subroutine, but written to file)
     real         :: electronic_energy
@@ -64,12 +69,28 @@ subroutine hf_main(geom,basis)
 
     ! Calculate stored integrals
     ! (change this to whatever you'd like, its just a place holder)
-    call stored_integrals(N,orbs,S,T,V,TE)
+    call stored_integrals(N,orbs,S,T,V_H,V_He,TE)
+
+    ! Allocate remaining matrices
+    allocate(F(N,N))
+    allocate(F_prime(N,N))
+    allocate(C(N,N))
+    allocate(C_prime(N,N))
+    allocate(H_core(N,N))
+    allocate(P(N,N))
+    allocate(G(N,N))
+    allocate(Ep(N,N))
+
+    ! Calculate the core Hamiltonian
+    H_core = T + V_H + V_He
 
     ! Diagonalize S to obtain X
-    call diagonalize(N,S,X)
+    call x_finder(N,S,X)
+    call hermitian_conjg(N,X,X_herm)
 
     ! Generate guess at density matrix - initial guess is G = zero
+    ! and P = zero
+    call G_init(N,P)
     call G_init(N,G) ! lives in the diagonalizer module
     goto 11
 
@@ -79,12 +100,17 @@ subroutine hf_main(geom,basis)
 
     ! Find F = T + V + G
     11 continue
+    F = H_core + G
 
     ! Transform the Fock matrix  to F'
+    ! Check that using 'real' here is ok
+    F_prime = real(matmul(X_herm,matmul(F,X)))
 
     ! Diagonalize (find eigvecs, vals) F' to obtain C' and epsilon
+    call eigen_finder(N,F_prime,C_prime,Ep)
 
     ! Find C = X C' 
+    C = matmul(X,C_prime)
 
     ! Form new density matrix P from C 
 
