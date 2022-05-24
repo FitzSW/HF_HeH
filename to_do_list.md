@@ -3,6 +3,6 @@
 A short file to keep track of small tasks that pop up.
 
 
-### Integral Functions
+### Evaluate the expression for G based on the two electron integrals
 
-### Make module to explicitly handle matrix passing from Fortran and C++
+Formula 3.154 p. 141 Szabo/Ostlund

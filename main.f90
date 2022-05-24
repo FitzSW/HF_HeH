@@ -38,7 +38,7 @@ subroutine hf_main(geom,basis)
 
     ! intermediate
     type(contracted_gto), allocatable, dimension(:) :: orbs
-    integer :: i ! A generic counter
+    integer :: i, j, k, l ! A generic counter
     integer :: N ! Number of orbitals
     real, allocatable, dimension(:,:) :: S
     real, allocatable, dimension(:,:) :: X
@@ -52,15 +52,26 @@ subroutine hf_main(geom,basis)
     real, allocatable, dimension(:,:) :: F_prime
     real, allocatable, dimension(:,:) :: G
     real, allocatable, dimension(:,:) :: P
+    real, allocatable, dimension(:,:) :: P_new
     real, allocatable, dimension(:,:) :: C
     real, allocatable, dimension(:,:) :: C_prime
+    real, allocatable, dimension(:,:) :: C_new
     real, allocatable, dimension(:,:) :: Ep
+
+    ! Values for determining matrix convergence
+    real :: diff, conv
+    ! Sum of elements for finding new P
+    real :: tab
 
     ! output (not returned by subroutine, but written to file)
     real         :: electronic_energy
     real         :: nuclear_energy
     real         :: total_energy
     character*80 :: output_file
+
+
+    ! Set convergence tolerance
+    conv = 1e-4
 
     ! initialize the system - ie. read in the geometry and basis set. 
     ! The orbitals should be collected into  a vector (called 'orbs') of the 'contracted-
@@ -75,9 +86,11 @@ subroutine hf_main(geom,basis)
     allocate(F(N,N))
     allocate(F_prime(N,N))
     allocate(C(N,N))
+    allocate(C_new(N,N))
     allocate(C_prime(N,N))
     allocate(H_core(N,N))
     allocate(P(N,N))
+    allocate(P_new(N,N))
     allocate(G(N,N))
     allocate(Ep(N,N))
 
@@ -113,9 +126,18 @@ subroutine hf_main(geom,basis)
     C = matmul(X,C_prime)
 
     ! Form new density matrix P from C 
+    do i = 1, N
+        do j = 1, N
+            ! Sum over only 1 occupied orbital
+            ! warning: conjugate may be needed
+            P_new(i,j) = 2 * C(i,1) * C(j,1)
+        enddo
+    enddo
 
     ! Determine convergence - if not then go back to 10
-    if (.true.) then
+    diff1 = abs(maxval(P_new - P))
+    P = P_new
+    if (diff > conv) then
         goto 10
     endif
 
@@ -129,8 +151,9 @@ subroutine hf_main(geom,basis)
 
     write(10,*) "Converged Energy Values (Hartree):"
     ! check the formatting 
-    write(10,f10.5) "Electronic Energy: ", electronic_energy
-    write(10,f10.f) "Nuclear Rep. Energy: ", nuclear_energy
-    write(10,f10.5) "Total Energy: ", total_energy
+    write(10,*) "Electronic Energy: ", electronic_energy
+    write(10,*) "Nuclear Rep. Energy: ", nuclear_energy
+    write(10,*) "Total Energy: ", total_energy
+    close(10)
 
 end subroutine hf_main
