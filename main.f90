@@ -2,8 +2,8 @@ program main
 !
 
 ! call in other modules that are relevant
-use orbitals
 ! use Gauss_Multiply
+use orbitals
 use reader
 use diagonalizer
 implicit none
@@ -30,6 +30,9 @@ call hf_main(geom,basis)
 end program main
 
 subroutine hf_main(geom,basis)
+    use orbitals
+    use reader
+    use diagonalizer
     implicit none
 
     ! input 
@@ -60,11 +63,13 @@ subroutine hf_main(geom,basis)
 
     ! Values for determining matrix convergence
     real :: diff, conv
-    ! Sum of elements for finding new P
-    real :: tab
+    integer :: cycle_num
+
 
     ! output (not returned by subroutine, but written to file)
+    real         :: temp_energy
     real         :: electronic_energy
+    real         :: dist
     real         :: nuclear_energy
     real         :: total_energy
     character*80 :: output_file
@@ -94,12 +99,16 @@ subroutine hf_main(geom,basis)
     allocate(G(N,N))
     allocate(Ep(N,N))
 
+    write(*,*) "Starting Cycle: ", cycle_num
+    cycle_num = cycle_num + 1
+
     ! Calculate the core Hamiltonian
     H_core = T + V_H + V_He
 
     ! Diagonalize S to obtain X
     call x_finder(N,S,X)
-    call hermitian_conjg(N,X,X_herm)
+    ! call hermitian_conjg(N,X,X_herm)
+    X_herm = transpose(X)
 
     ! Generate guess at density matrix - initial guess is G = zero
     ! and P = zero
@@ -135,15 +144,28 @@ subroutine hf_main(geom,basis)
     enddo
 
     ! Determine convergence - if not then go back to 10
-    diff1 = abs(maxval(P_new - P))
+    diff = abs(maxval(P_new - P))
     P = P_new
     if (diff > conv) then
+        write(*,*) "Starting Cycle: ", cycle_num
+        cycle_num = cycle_num + 1
         goto 10
     endif
 
     ! Print out the converged matrix  
 
     ! Calculate expectation value of electronic energy frim matrix values
+    do i = 1, N
+        do j = 1, N
+            temp_energy = 0.5 * P(j,i) * (H_core(i,j) + F(i,j))
+            electronic_energy = electronic_energy + temp_energy
+        enddo
+    enddo
+
+    dist = norm2(orbs(1)%coords - orbs(N)%coords)
+    nuclear_energy = 2.0 / dist
+
+    total_energy = electronic_energy + nuclear_energy
 
     ! Find total energy (+ Nuc) and print output
     output_file = "hf_out.out"

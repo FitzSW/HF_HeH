@@ -21,7 +21,7 @@ using Eigen::MatrixXd;
 
 using namespace Eigen;
 
-int main(int argc, char** argv) { 
+int main() { 
 
 	// file string names
 	std::string in_file = "temp_file_1";

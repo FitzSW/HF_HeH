@@ -70,7 +70,7 @@
 \title[MENG 25510 Final]{MENG 25510 Final Report:\\ Hartree-Fock on
 HeH$^{+}$ with 6-311G}
 % Force line breaks with \\
-\author{Noah Dohrmann and Sullivan Fitz}
+\author{N.\ R.\ Dohrmann and S.\ W.\ Fitz}
  % \altaffiliation{University of Chicago, The College}%Lines break automatically or can be forced with \\
  % \email{ndohrmann@uchicago.edu}
 
@@ -122,17 +122,41 @@ the \emph{symmetric orthogonalization} scheme
 %
 The necessary matrix computations are done with assistance from the C++
 numerics library Eigen\cite{eigenweb}, which is also later used to find the 
-eigenvalues and eigenvectors of matrices at each cycle of the SCF procedure.
+eigenvalues and eigenvectors of matrices at each cycle of the SCF procedure
+when solving 
+\begin{equation}
+\bold{F}'\bold{C}' = \bold{C'}\bold{\epsilon}
+\end{equation}
+with $\bold{F}'$ as the transformed Fock matrix, 
+$\bold{C}'$ as the transformed coefficient matrix, and $\bold{\epsilon}$ as a
+diagonal matrix of orbital energies.
+
+After the transformed coefficient matrix is found, it is reverted back to the
+original basis via $\bold{C} = \bold{X}\bold{C}'$. A real attempt at the density
+matrix $\bold{P}$ can now be found, as well as $\bold{G}$ for the next cycle
+of the SCF procedure using a new Fock matrix.  This cycle is repeated
+iteratively until the largest change in any element of the density matrix is
+less than $10^{-4}$.  Finally, once we have obatained converged matrices, a
+numerical value for the ground state electronic energy of the occupied
+molecular orbital is
+\begin{equation}
+E_0^{\text{elec.}} = \frac{1}{2} \sum_{\mu\nu} \bold{P}_{\nu\mu} \left(
+\bold{H}_{\mu\nu}^{\text{core}} + \bold{F}_{\mu\nu} \right)
+\end{equation}
+which can then be added to the nuclear repulsion energy 
+$E_0 = E_0^{\text{elec.}} + E_0^{\text{nuc.}}$.
+
 
 
 \section{Use and Installation}
 In order to run our code, please clone the git repository that is linked in
 the abstract of this document. These instructions will assume that you are
-on a *nix system and have {\code gfortran} and a C++ compiler such as 
+on a *nix system (i.e.\ you have access to {\code wc} and {\code rm} as
+system commands) and have {\code gfortran} and a C++ compiler such as 
 {\code clang} that has access to the Eigen header files. Then, inside the
 cloned directory, run the command: 
 %
-$$ \text{{\code test}} $$
+$$ \text{{\code ./build.sh}} $$
 to build and execute the project. The results of the SCF procedure will be
 written to file in {\code hf\_out.out}.
 
