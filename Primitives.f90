@@ -71,7 +71,7 @@ CONTAINS
                 CALL Overlap(alpha_a,alpha_b,R_a,R_b, O)
                 
                 answer = O * coeff_a * coeff_b
-
+        END FUNCTION
 
 
         FUNCTION Kinetic_Prim(mu, nu, i,j)
@@ -118,6 +118,8 @@ CONTAINS
                 CALL Kinetic(alpha_a,alpha_b,R_a,R_b, K)
                 
                 answer = K * coeff_a * coeff_b
+                
+         END FUNCTION
 
         
          FUNCTION Potential_Prim(mu, nu, i,j, atom)
@@ -186,6 +188,8 @@ CONTAINS
                 
                 answer = V * coeff_a * coeff_b
                 
+        END FUNCTION
+                
 
 
         FUNCTION Two_Electron_Prim(mu,nu,lambda,sigma,i,j,k,l)
@@ -243,3 +247,5 @@ CONTAINS
                 
                 answer = TE * coeff_a * coeff_b * coeff_c * coeff_d
 
+        END FUNCTION
+END MODULE
