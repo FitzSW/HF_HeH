@@ -219,8 +219,8 @@ CONTAINS
                                                                 DO k = 1, k_f
                                                                         DO l = 1, l_f
                                                                                 
-                                                                                GM(mu,nu) = GM(mu,nu) +
-                                                                                P(lambda,sigma)*(Two_Electron_Prim(mu,nu,lambda,sigma,i,j,k,l)
+                                                                                GM(mu,nu) = GM(mu,nu) + &
+                                                                                P(lambda,sigma)*(Two_Electron_Prim(mu,nu,lambda,sigma,i,j,k,l)&
                                                                                 - (1/2) * Two_Electron_Prim(mu,lambda,sigma,nu,i,k,l,j))
                                                                                 
 
