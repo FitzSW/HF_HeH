@@ -16,8 +16,8 @@ Fortran base files built!...
 Compiling matrix executables...
 "
 
-c++ -std=c++20  -O3 -Wall -Wextra Matrix_IO/cc_x_finder.cc -o ./cc_x_finder
-c++ -std=c++20  -O3 -Wall -Wextra Matrix_IO/cc_eigen_finder.cc -o ./cc_eigen_finder
+c++   -O3 -Wall -Wextra Matrix_IO/cc_x_finder.cc -o ./cc_x_finder
+c++   -O3 -Wall -Wextra Matrix_IO/cc_eigen_finder.cc -o ./cc_eigen_finder
 
 echo "
 
@@ -28,8 +28,6 @@ Project successfully built! ...
 echo "Running HF SCF Procedure..."
 
 ./a.out
-
-
 
 echo "Done! Output written to 'hf_out.out'"
 rm a.out
