@@ -6,7 +6,7 @@ MODULE Primitive
 
         USE constants
 
-        USE oribtals
+        USE orbitals
 
         USE reader
 

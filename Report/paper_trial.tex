@@ -99,7 +99,8 @@ using the same geometry and basis set.
 \section{Hartree-Fock Algorithm and Code Details}
 We closely follow the suggested implementation scheme given in Szabo and
 Ostlund\cite{szabo2012modern}, in which explicit formulas and matrix
-algorithms are given.  
+algorithms are given. Any of the following formulas can be found in this
+reference text if not explicitly stated otherwise.
 
 \subsection{Program Control Flow} 
 First, the input geometry and basis set files are read into the main program
@@ -153,7 +154,11 @@ In order to run our code, please clone the git repository that is linked in
 the abstract of this document. These instructions will assume that you are
 on a *nix system (i.e.\ you have access to {\code wc} and {\code rm} as
 system commands) and have {\code gfortran} and a C++ compiler such as 
-{\code clang} that has access to the Eigen header files. Then, inside the
+{\code clang} that has access to the Eigen header files.\footnote{If you don't
+have the header files, then find them here \\
+\protect\url{https://gitlab.com/libeigen/eigen} and place the directory ``Eigen'' in
+the same directory as the Matrix\_IO files, then run the command {\code
+./eigen\_adaptor.sh}.} Then, inside the
 cloned directory, run the command: 
 %
 $$ \text{{\code ./build.sh}} $$
