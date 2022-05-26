@@ -38,6 +38,7 @@
 \newcommand{\rbar}{\right|}
 \newcommand{\lbr}{\left<}
 \newcommand{\rbr}{\right>}
+% \usepackage{hyperref}
 \usepackage{fontspec}
 \newfontfamily\code{Courier New}
 \usepackage{graphicx}% Include figure files
@@ -148,29 +149,39 @@ which can then be added to the nuclear repulsion energy
 $E_0 = E_0^{\text{elec.}} + E_0^{\text{nuc.}}$.
 
 
-
 \section{Use and Installation}
 In order to run our code, please clone the git repository that is linked in
 the abstract of this document. These instructions will assume that you are
-on a *nix system (i.e.\ you have access to {\code wc} and {\code rm} as
-system commands) and have {\code gfortran} and a C++ compiler such as 
-{\code clang} that has access to the Eigen header files.\footnote{If you don't
-have the header files, then find them here \\
-\protect\url{https://gitlab.com/libeigen/eigen} and place the directory ``Eigen'' in
-the same directory as the Matrix\_IO files, then run the command {\code
-./eigen\_adaptor.sh}.} Then, inside the
+ on a *nix system (i.e.\ you have access to {\code wc} and {\code rm} as
+ system commands) and have {\code gfortran} and a C++ compiler such as 
+ {\code clang} that has access to the Eigen header files.\footnote{If you don't
+have the header files,  then run the command 
+{\code ./eigen\_adaptor.sh}, which will install the necessary files via git.} Then, inside the
 cloned directory, run the command: 
 %
-$$ \text{{\code ./build.sh}} $$
+ $$ \text{{\code ./build.sh}} $$
 to build and execute the project. The results of the SCF procedure will be
-written to file in {\code hf\_out.out}.
+ written to file in {\code hf\_out.out}.
 
 \section{Results and Discussion}
-
+We found a final electronic energy of () with a nuclear repulsion energy of
+() for a total molecular energy of () [Ha.]. Please see a comparison of our
+results to the benchmark and PySCF values in Table (). 
 
 \section{Conclusion}
-
-
+If this project were to be extended for more general use, the basis sets and
+geometries of additional systems could easily be read into the main program
+in the current state of the code. The main area for improvement that would
+have to be more thoroughly adapted are the evaluation of molecular integrals 
+involving atomic orbitals of angular momentum $l > 0$, which are much more
+complex in their evaluation than the $s$ type orbitals that are considered in
+this report. Additionally, there is further room for optimization in the
+linear algebra functionality of this project. Currently, matrices must be
+written to file, processed, and read back into the main executable at the
+start of the program and at each stage of the SCF cycle. Clearly, this is not
+the most efficient way to handle matrix computations, and an improved code
+would ideally include LAPACK functions and subroutines to be used within
+Fortran itself.
 
 
 % \nocite{*}
