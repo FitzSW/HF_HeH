@@ -22,10 +22,13 @@ Some of the code in these files requires UNIX commands (eg. "wc" for counting
 file lines), and may not work if run without them.
 
 For linear algebra functionality, C++/Eigen is used, so it is assumed that you
-have a C++ compiler and it has access to the Eigen library header files. One should compile 
-the file Matrix_IO/cc_exec.cc to an executable called "cc_matrix_handler" which will be 
-called within the main program for finding transformation matrices.
+have a C++ compiler and it has access to the Eigen library header files. 
+If you don't have the header files, then find them here
+https://gitlab.com/libeigen/eigen, and place the directory "Eigen" inside
+the directory "Matrix\_IO". Lastly, run the command `./eigen_adaptor.sh`
 
+To build and run the project, run `./build.sh` in the main directory. The
+output will be written to "hf\_out.out"
 
 ### References
 
