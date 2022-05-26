@@ -138,7 +138,7 @@ original basis via $\bold{C} = \bold{X}\bold{C}'$. A real attempt at the density
 matrix $\bold{P}$ can now be found, as well as $\bold{G}$ for the next cycle
 of the SCF procedure using a new Fock matrix.  This cycle is repeated
 iteratively until the largest change in any element of the density matrix is
-less than $10^{-4}$.  Finally, once we have obatained converged matrices, a
+less than $10^{-4}$.  Finally, once we have obtained converged matrices, a
 numerical value for the ground state electronic energy of the occupied
 molecular orbital is
 \begin{equation}
@@ -156,10 +156,13 @@ the abstract of this document. These instructions will assume that you are
  system commands) and have {\code gfortran} and a C++ compiler such as 
  {\code clang} that has access to the Eigen header files.\footnote{If you don't
 have the header files,  then run the command 
-{\code ./eigen\_adaptor.sh}, which will install the necessary files via git.} Then, inside the
-cloned directory, run the command: 
+{\code ./mac\_eigen.sh} or {\code ./midway\_eigen.sh}, which will install the necessary files via git.
+\textbf{Please make sure to do this \emph{before} running the build script.}} Then, inside the
+cloned directory, run one of the following commands (if not on a mac, please
+log into Midway and run the files there): 
 %
- $$ \text{{\code ./build.sh}} $$
+$$ \text{{\code ./mac\_build.sh}} \hspace{0.5cm}
+ \text{{\code ./midway\_build.sh}} $$
 to build and execute the project. The results of the SCF procedure will be
  written to file in {\code hf\_out.out}.
 
