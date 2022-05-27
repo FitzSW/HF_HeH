@@ -1,11 +1,10 @@
 # Hartree-Fock Implementation: Fortran90
-MENG 25510 - Final Project 
 
-University of Chicago
+MENG 25510: Quantum Molecular and Materials Modeling -  Final Project 
 
-Spring 2022
+University of Chicago, Spring 2022
 
-Primary Authors: Sullivan Fitz, Noah Dohrmann
+Primary Authors: **Sullivan Fitz**, **Noah Dohrmann**
 
 ### Scale of Project
 
@@ -23,12 +22,17 @@ file lines), and may not work if run without them.
 
 For linear algebra functionality, C++/Eigen is used, so it is assumed that you
 have a C++ compiler and it has access to the Eigen library header files. 
-If you don't have the header files, then find them here
-https://gitlab.com/libeigen/eigen, and place the directory "Eigen" inside
-the directory "Matrix\_IO". Lastly, run the command `./eigen_adaptor.sh`
+If you don't
+have the header files,  then run either of the below commands depending if you
+are on a Mac or are on Linux (Midway preferred)
+``./mac_eigen.sh`` or ``./midway_eigen.sh``. 
+These will install the necessary files via git.  **Please make sure to
+do this *before* running the build script.** Then, inside the cloned
+directory, run one of the following commands: 
+``./mac_build.sh`` or ``./midway_build.sh``
+to build and execute the project. The results of the SCF procedure will be
+ written to file in `hf_out.out`.
 
-To build and run the project, run `./build.sh` in the main directory. The
-output will be written to "hf\_out.out"
 
 ### References
 

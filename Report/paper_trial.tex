@@ -154,12 +154,13 @@ In order to run our code, please clone the git repository that is linked in
 the abstract of this document. These instructions will assume that you are
  on a *nix system (i.e.\ you have access to {\code wc} and {\code rm} as
  system commands) and have {\code gfortran} and a C++ compiler such as 
- {\code clang} that has access to the Eigen header files.\footnote{If you don't
-have the header files,  then run the command 
-{\code ./mac\_eigen.sh} or {\code ./midway\_eigen.sh}, which will install the necessary files via git.
-\textbf{Please make sure to do this \emph{before} running the build script.}} Then, inside the
-cloned directory, run one of the following commands (if not on a mac, please
-log into Midway and run the files there): 
+ {\code clang} that has access to the Eigen header files. If you don't
+have the header files,  then run either of the below commands depending if you
+are on a Mac or are on Linux (Midway preferred)
+$$ \text{{\code ./mac\_eigen.sh} \hspace{0.5cm}{\code ./midway\_eigen.sh}}$$
+These will install the necessary files via git.  \textbf{Please make sure to
+do this \emph{before} running the build script.} Then, inside the cloned
+directory, run one of the following commands: 
 %
 $$ \text{{\code ./mac\_build.sh}} \hspace{0.5cm}
  \text{{\code ./midway\_build.sh}} $$
