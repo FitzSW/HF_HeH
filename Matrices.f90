@@ -53,6 +53,12 @@ CONTAINS
                                 DO i = 1, i_f
 
                                         DO j = 1, j_f
+                                                
+                                                WRITE(*,*) "Contraction:", mu,nu
+                                                
+                                                WRITE(*,*) "Primitives:", i,j
+                                                
+                                                WRITE(*,*) "Primitive Integral Value:", Overlap_Prim(mu,nu,i,j)
 
                                                 OM(mu,nu) = OM(mu,nu) + Overlap_Prim(mu,nu,i,j)
 
