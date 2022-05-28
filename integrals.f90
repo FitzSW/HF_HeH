@@ -12,15 +12,12 @@ MODULE integrals
           !import necessary modules
           USE constants!, only :: PI_16
           
-          USE Gauss_Multiply
+          USE Gauss
 
           USE F_0
 
           IMPLICIT NONE
 
-          REAL, DIMENSION(N,N) :: S, H, TWO_ELECTRON
-          !N here will be the size of the matrices based on basis set
-          !maybe 16x16
 
   
 
@@ -88,11 +85,11 @@ CONTAINS
             !Szabo and Ostlund don't mention these two cases, but another report I found does, so I will include them just in case
             !To be clear, Szabo and Ostlund just includes the R_p != R_c case
             
-            IF (R_p.eq.R_c) THEN
+            IF (ALL(R_p.eq.R_c)) THEN
             
                 V = (2*PI_16/p)*Z_c*konstant
             
-            ELSE IF (R_p.ne.R_c) THEN
+            ELSE 
 
                 vec_new = R_p - R_c
 
@@ -126,13 +123,13 @@ CONTAINS
             
             !There are two possible results for this integral based on if R_p and R_q are equal
             
-            IF (R_p.eq.R_q) THEN
+            IF (ALL(R_p.eq.R_q)) THEN
             
               !case one
 
               TE = ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q
             
-            ELSE IF (R_p.ne.R_q) THEN
+            ELSE
             
               !case two
 

@@ -1,4 +1,4 @@
-Module Gauss_Multiply
+Module Gauss
 
 
         USE constants
@@ -13,13 +13,13 @@ CONTAINS
                 !currently unnormalized, but v. easy to add
                 IMPLICIT NONE
 
-                DOUBLE PRECISION,  intent(in) :: alpha_a, alpha_b
+                REAL,  intent(in) :: alpha_a, alpha_b
                 
-                DOUBLE PRECISION, dimension(3), intent(in) :: R_a, R_b
+                REAL, dimension(3), intent(in) :: R_a, R_b
 
-                DOUBLE PRECISION,  intent(out) :: konstant, p
+                REAL,  intent(out) :: konstant, p
                 
-                DOUBLE PRECISION, dimension(3), intent(out) :: R_p
+                REAL, dimension(3), intent(out) :: R_p
 
                 REAL :: gamma_
                 
@@ -44,4 +44,4 @@ CONTAINS
 
         END SUBROUTINE
 
-END MODULE Gauss_Multiply
+END MODULE Gauss

@@ -1,6 +1,5 @@
 MODULE Primitive
 
-        IMPLICIT NONE
 
         !Load in necessary modules
 
@@ -11,6 +10,8 @@ MODULE Primitive
         USE reader
 
         USE integrals
+
+        IMPLICIT NONE
 
 
 
@@ -23,12 +24,12 @@ MODULE Primitive
 CONTAINS
 
 
-        FUNCTION Overlap_Prim(mu, nu, i,j)
+        FUNCTION Overlap_Prim(mu, nu, i,j) result(answer)
 
 
                 IMPLICIT NONE
 
-                INTEGER, intent(in) :: i,j
+                INTEGER, intent(in) :: i,j, mu, nu
 
                 REAL :: alpha_a, alpha_b, answer, O, coeff_a, coeff_b
 
@@ -47,24 +48,17 @@ CONTAINS
                 basis = "./Basis_Set/adapted_6-311G"
                 
                 CALL reader_sub(geom,basis,N,orbs)
-
-                !Pull contraction
-
-                contraction_a = orbs(mu)%contraction
-
-                contract_b = orbs(nu)%contraction
-
                 
                 !Then, assign values based on the desired primitive gaussian multiplication
 
-                alpha_a = contraction_a(i)%expo
-                alpha_b = contraction_b(j)%expo
+                alpha_a = orbs(mu)%contraction(i)%expo
+                alpha_b = orbs(nu)%contraction(j)%expo
 
                 R_a = orbs(mu)%coords
                 R_b = orbs(nu)%coords
                 
-                coeff_a = contraction_a(i)%coeff
-                coeff_b = contraction_b(j)%coeff
+                coeff_a = orbs(mu)%contraction(i)%coeff
+                coeff_b = orbs(mu)%contraction(j)%coeff
 
 
                 !Finally, compute the value of the overlap integral for those two orbitals 
@@ -74,15 +68,15 @@ CONTAINS
         END FUNCTION
 
 
-        FUNCTION Kinetic_Prim(mu, nu, i,j)
+        FUNCTION Kinetic_Prim(mu, nu, i,j) result(answer)
 
                 IMPLICIT NONE
 
-                INTEGER, intent(in) :: i,j
+                INTEGER, intent(in) :: i,j, mu, nu
 
                 REAL :: alpha_a, alpha_b, answer, K, coeff_a, coeff_b
 
-                REAL, dim(3) :: R_a, R_b
+                REAL, dimension(3) :: R_a, R_b
 
                 REAL, allocatable :: contraction_a, contraction_b
 
@@ -98,21 +92,16 @@ CONTAINS
                 
                 CALL reader_sub(geom,basis,N,orbs)
 
-                !Pull contractions
-
-                contraction_a = orbs(mu)%contraction
-                contraction_b = orbs(nu)%contraction
-
                 !Then, assign values based on the desired primitive gaussian multiplication
 
-                alpha_a = contraction_a(i)%expo
-                alpha_b = contraction_b(j)%expo
+                alpha_a = orbs(mu)%contraction(i)%expo
+                alpha_b = orbs(nu)%contraction(j)%expo
 
                 R_a = orbs(mu)%coords
                 R_b = orbs(nu)%coords
 
-                coeff_a = contraction_a(i)%coeff
-                coeff_b = contraction_b(j)%coeff
+                coeff_a = orbs(mu)%contraction(i)%coeff
+                coeff_b = orbs(nu)%contraction(j)%coeff
 
                 !Finally, compute the value of the kinetic integral for those two orbitals 
                 CALL Kinetic(alpha_a,alpha_b,R_a,R_b, K)
@@ -122,17 +111,17 @@ CONTAINS
          END FUNCTION
 
         
-         FUNCTION Potential_Prim(mu, nu, i,j, atom)
+         FUNCTION Potential_Prim(mu, nu, i,j, atom) result(answer)
 
                 IMPLICIT NONE
 
-                INTEGER, intent(in) :: i,j
+                INTEGER, intent(in) :: i,j, mu,nu
 
                 CHARACTER*2, intent(in) :: atom
 
                 REAL :: alpha_a, alpha_b, answer, Z_c, V, coeff_a, coeff_b
 
-                REAL, dim(3) :: R_a, R_b, R_c
+                REAL, dimension(3) :: R_a, R_b, R_c
 
                 REAL, allocatable :: contraction_a, contraction_b
 
@@ -148,23 +137,17 @@ CONTAINS
                 
                 CALL reader_sub(geom,basis,N,orbs)
 
-                !Pull contractions
-
-                contraction_a = orbs(mu)%contraction
-
-                contraction_b = orbs(nu)%contraction
-
                 
                 !Then, assign values based on the desired primitive gaussian multiplication
 
-                alpha_a = contraction_a(i)%expo
-                alpha_b = contraction_b(j)%expo
+                alpha_a = orbs(mu)%contraction(i)%expo
+                alpha_b = orbs(nu)%contraction(j)%expo
 
                 R_a = orbs(mu)%coords
                 R_b = orbs(nu)%coords
 
-                coeff_a = contraction_a(i)%coeff
-                coeff_b = contraction_b(j)%coeff
+                coeff_a = orbs(mu)%contraction(i)%coeff
+                coeff_b = orbs(nu)%contraction(j)%coeff
 
 
                 !For potential integral, will need the atomic number and center of desired atom
@@ -173,13 +156,13 @@ CONTAINS
 
                         Z_c = 1.0
 
-                        R_c = (\0.0, 0.0, -0.517427\)
+                        R_c = (/0.0, 0.0, -0.517427/)
 
                 ELSE IF (atom.eq."He") THEN
 
                         Z_c = 2.0
 
-                        R_c = (\0.0, 0.0, 0.258713\)
+                        R_c = (/0.0, 0.0, 0.258713/)
 
                 END If
 
@@ -192,15 +175,15 @@ CONTAINS
                 
 
 
-        FUNCTION Two_Electron_Prim(mu,nu,lambda,sigma,i,j,k,l)
+        FUNCTION Two_Electron_Prim(mu,nu,lambda,sigma,i,j,k,l) result(answer)
 
                 IMPLICIT NONE
 
-                INTEGER, intent(in) :: i,j,k,l
+                INTEGER, intent(in) :: i,j,k,l, mu, nu, lambda, sigma
 
                 REAL :: alpha_a, alpha_b, alpha_c, alpha_d, answer, TE, coeff_a, coeff_b, coeff_c, coeff_d
 
-                REAL, dim(3) :: R_a, R_b, R_c, R_d
+                REAL, dimension(3) :: R_a, R_b, R_c, R_d
 
                 REAL, allocatable :: contraction_a, contraction_b, contraction_c, contraction_d
 
@@ -216,30 +199,23 @@ CONTAINS
                 
                 CALL reader_sub(geom,basis,N,orbs)
 
-                !pull contractions
-
-                contraction_a = orbs(mu)%contraction
-                contraction_b = orbs(nu)%contraction
-                contraction_c = orbs(lambda)%contraction
-                contraction_d = orbs(sigma)%contraction
-
                 
                 !Then, assign values based on the desired primitive gaussian multiplication
 
-                alpha_a = contraction_a%expo(i)
-                alpha_b = contraction_b%expo(j)
-                alpha_c = contraction_c%expo(k)
-                alpha_d = contraction_d%expo(l)
+                alpha_a = orbs(mu)%contraction(i)%expo
+                alpha_b = orbs(nu)%contraction(j)%expo
+                alpha_c = orbs(lambda)%contraction(k)%expo
+                alpha_d = orbs(sigma)%contraction(l)%expo
 
                 R_a = orbs(mu)%coords
                 R_b = orbs(nu)%coords
                 R_c = orbs(lambda)%coords
                 R_d = orbs(sigma)%coords
 
-                coeff_a = contraction_a%coeff(i)
-                coeff_b = contraction_b%coeff(j)
-                coeff_c = contraction_c%coeff(k)
-                coeff_d = contraction_d%coeff(l)
+                coeff_a = orbs(mu)%contraction(i)%coeff
+                coeff_b = orbs(nu)%contraction(j)%coeff
+                coeff_c = orbs(lambda)%contraction(k)%coeff
+                coeff_d = orbs(sigma)%contraction(l)%coeff
 
 
                 !Finally, compute the value of the two electron integral for those two orbitals 

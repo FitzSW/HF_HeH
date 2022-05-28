@@ -1,10 +1,19 @@
 MODULE Matrices
 
 
+
+        USE Primitive
+
+        USE constants
+
+        USE orbitals
+
+        USE reader
+
+        USE integrals
+
+
         IMPLICIT NONE
-
-
-        USE Primitive, constants, orbitals, reader, integrals
 
 
 
@@ -164,7 +173,7 @@ CONTAINS
 
 
 
-        SUBROUTINE Compute_G(P, GM):
+        SUBROUTINE Compute_G(P, GM)
 
                 IMPLICIT NONE
 
@@ -178,7 +187,7 @@ CONTAINS
                 DO mu = 1,6
                         
                         !specificy length of contraction for mu
-                        IF ((mu.eq.1).or.(mu.eq.4) THEN
+                        IF ((mu.eq.1).or.(mu.eq.4)) THEN
                                 i_f = 3
                         ELSE
                                 i_f=1
@@ -187,7 +196,7 @@ CONTAINS
                         DO nu = 1,6
                                 
                                 !specificy length of contraction
-                                IF ((nu.eq.1).or.(nu.eq.4) THEN
+                                IF ((nu.eq.1).or.(nu.eq.4)) THEN
                                         j_f = 3
                                 ELSE
                                         j_f = 1
@@ -196,7 +205,7 @@ CONTAINS
                                 DO lambda = 1,6
 
                                         !specify length of contraction
-                                        IF ((lambda.eq.1).or.(lambda.eq.4) THEN
+                                        IF ((lambda.eq.1).or.(lambda.eq.4)) THEN
                                                 k_f = 3
                                         ELSE
                                                 k_f = 1
@@ -205,7 +214,7 @@ CONTAINS
                                         DO sigma = 1,6
                                                 
                                                 !specificy length of contraction
-                                                IF ((sigma.eq.1).or.(sigma.eq.4) THEN
+                                                IF ((sigma.eq.1).or.(sigma.eq.4)) THEN
                                                         l_f = 3
                                                 ELSE
                                                         l_f = 1
@@ -218,10 +227,10 @@ CONTAINS
                                                         DO j = 1,j_f
                                                                 DO k = 1, k_f
                                                                         DO l = 1, l_f
-                                                                                
-                                                                                GM(mu,nu) = GM(mu,nu) + &
-                                                                                P(lambda,sigma)*(Two_Electron_Prim(mu,nu,lambda,sigma,i,j,k,l)&
-                                                                                - (1/2) * Two_Electron_Prim(mu,lambda,sigma,nu,i,k,l,j))
+                                                                
+                                                                GM(mu,nu) = GM(mu,nu) + &
+                                                                P(lambda,sigma)*(Two_Electron_Prim(mu,nu,lambda,sigma,i,j,k,l)&
+                                                                - (1/2) * Two_Electron_Prim(mu,lambda,sigma,nu,i,k,l,j))
                                                                                 
 
                                                                         END DO
@@ -233,6 +242,7 @@ CONTAINS
                                 END DO
                         END DO
                 END DO
+        END SUBROUTINE
                                         
 
 

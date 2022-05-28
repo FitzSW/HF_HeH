@@ -1,11 +1,12 @@
 MODULE F_0
-        IMPLICIT NONE
 
-        Use constants, only :: PI_16
+        Use constants, only : PI_16
+
+        IMPLICIT NONE
 
 CONTAINS
 
-        FUNCTION Function_0(t)
+        REAL FUNCTION Function_0(t)
 
                 REAL, intent(in) :: t
 
