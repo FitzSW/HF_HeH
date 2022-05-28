@@ -81,7 +81,8 @@ subroutine reader_sub(geom,basis,N,orbs)
             allocate(local_expo_vec(loc_M))
 
             do k = 1, loc_M
-                read(11,*) local_coeff_vec(k), local_expo_vec(k)
+                ! read(11,*) local_coeff_vec(k), local_expo_vec(k)
+                read(11,*) local_expo_vec(k), local_coeff_vec(k)
             enddo
 
             local_orbital = new_contraction(loc_M, &
