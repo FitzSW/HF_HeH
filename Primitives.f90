@@ -53,12 +53,16 @@ CONTAINS
 
                 alpha_a = orbs(mu)%contraction(i)%expo
                 alpha_b = orbs(nu)%contraction(j)%expo
+                
+                WRITE(*,*) "EXPONENTS:", alpha_a, alpha_b
 
                 R_a = orbs(mu)%coords
                 R_b = orbs(nu)%coords
                 
                 coeff_a = orbs(mu)%contraction(i)%coeff
                 coeff_b = orbs(mu)%contraction(j)%coeff
+                
+                WRITE(*,*) "COEFFICIENTS:", coeff_a, coeff_b
 
 
                 !Finally, compute the value of the overlap integral for those two orbitals 
