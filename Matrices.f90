@@ -54,9 +54,6 @@ CONTAINS
 
                                         DO j = 1, j_f
                                                 
-                                                WRITE(*,*) "Contraction:", mu,nu
-                                                
-                                                WRITE(*,*) "Primitives:", i,j
 
                                                 OM(mu,nu) = OM(mu,nu) + Overlap_Prim(mu,nu,i,j)
 
