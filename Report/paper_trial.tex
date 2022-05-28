@@ -170,7 +170,25 @@ to build and execute the project. The results of the SCF procedure will be
 \section{Results and Discussion}
 We found a final electronic energy of () with a nuclear repulsion energy of
 () for a total molecular energy of () [Ha.]. Please see a comparison of our
-results to the benchmark and PySCF values in Table (). 
+results to the benchmark and PySCF values in Table \ref{tab:hf_results}.
+
+\begin{table}[]
+\caption{HF Results Comparison on HeH$^{+}$ by Method}
+\label{tab:hf_results}
+\begin{ruledtabular}
+\begin{tabular}{|c|c|c|}
+\hline
+\multicolumn{1}{|l|}{\textbf{Method / Data Source}} &
+\multicolumn{1}{c|}{\textbf{Bond Length\footnote{Optimzed with
+CCSD/aug-cc-pVTZ, this value used with both HF/6-311G calculations.} [Å] \ \ \ \ }} 
+& \multicolumn{1}{l|}{\textbf{Total $E_0$, [Ha.]}} \\ \hline
+CCSD/aug-cc-pVTZ\footnote{Gaussian 16}      & .776140  & -2.9753932    \\ \hline 
+HF/6-311G\footnote{PySCF}     & .776140     & -2.9164905    \\ \hline
+HF/6-311G\footnote{This Report}  & .776140  &          \\ \hline
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
 
 \section{Conclusion}
 If this project were to be extended for more general use, the basis sets and

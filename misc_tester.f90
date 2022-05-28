@@ -86,5 +86,7 @@ program tester
     I = reshape((/ -2.4397, -0.5158, -0.5158, -1.5387 /),shape(I))
     call eigen_finder(N,I,O,E)
 
+    write(*,*) "did not crash"
+
 
 end program tester

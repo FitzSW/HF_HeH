@@ -3,8 +3,14 @@ program main
 
 ! call in other modules that are relevant
 ! use Gauss_Multiply
+use constants
+use gauss
+use F_0
+use integrals
 use orbitals
 use reader
+use primitive
+use Matrices
 use diagonalizer
 implicit none
 
@@ -21,8 +27,9 @@ character*80 geom
 character*80 basis
 
 
-call get_command_argument(1,geom)
-call get_command_argument(2,basis)
+geom = "./Opt/heh_geom.xyz"
+basis = "./Basis_Set/adapted_6-311G"
+
 
 ! The do-everything subroutine (pre-determined basis set)
 call hf_main(geom,basis)
@@ -30,8 +37,14 @@ call hf_main(geom,basis)
 end program main
 
 subroutine hf_main(geom,basis)
+    use constants
+    use gauss
+    use F_0
+    use integrals
     use orbitals
     use reader
+    use primitive
+    use Matrices
     use diagonalizer
     implicit none
 
@@ -47,8 +60,7 @@ subroutine hf_main(geom,basis)
     real, allocatable, dimension(:,:) :: X
     real, allocatable, dimension(:,:) :: X_herm
     real, allocatable, dimension(:,:) :: T
-    real, allocatable, dimension(:,:) :: V_H
-    real, allocatable, dimension(:,:) :: V_He
+    real, allocatable, dimension(:,:) :: V_tot
     real, allocatable, dimension(:,:) :: H_core
     real, allocatable, dimension(:,:) :: TE ! Two electron
     real, allocatable, dimension(:,:) :: F
@@ -62,9 +74,8 @@ subroutine hf_main(geom,basis)
     real, allocatable, dimension(:,:) :: Ep
 
     ! Values for determining matrix convergence
-    real :: diff, conv
+    real    :: diff, conv
     integer :: cycle_num
-
 
     ! output (not returned by subroutine, but written to file)
     real         :: temp_energy
@@ -73,7 +84,10 @@ subroutine hf_main(geom,basis)
     real         :: nuclear_energy
     real         :: total_energy
     character*80 :: output_file
+    character*80 :: S_out
 
+    ! Dummy file for printing out de-bug matrices
+    S_out = "S_out"
 
     ! Set convergence tolerance
     conv = 1e-4
@@ -83,9 +97,17 @@ subroutine hf_main(geom,basis)
     ! gto' derived type
     call reader_sub(geom,basis,N,orbs)
 
+    write(*,*) "checkpoint A"
     ! Calculate stored integrals
     ! (change this to whatever you'd like, its just a place holder)
-    call stored_integrals(N,orbs,S,T,V_H,V_He,TE)
+    ! call stored_integrals(N,orbs,S,T,V_H,V_He,TE)
+    allocate(S(N,N))
+    allocate(T(N,N))
+    allocate(V_tot(N,N))
+    call Compute_Overlap(S)
+    call Compute_Kinetic(T)
+    call Compute_Potential(V_tot)
+    write(*,*) "checkpoint B"
 
     ! Allocate remaining matrices
     allocate(F(N,N))
@@ -97,18 +119,25 @@ subroutine hf_main(geom,basis)
     allocate(P(N,N))
     allocate(P_new(N,N))
     allocate(G(N,N))
+    ! allocate(V_tot(N,N))
+    ! allocate(T(N,N))
     allocate(Ep(N,N))
 
     write(*,*) "Starting Cycle: ", cycle_num
     cycle_num = cycle_num + 1
 
     ! Calculate the core Hamiltonian
-    H_core = T + V_H + V_He
+    H_core = T + V_tot
 
     ! Diagonalize S to obtain X
+
+    write(*,*) "checkpoint C"
+    call matrix_writer(N,S,S_out)
+
     call x_finder(N,S,X)
     ! call hermitian_conjg(N,X,X_herm)
     X_herm = transpose(X)
+    write(*,*) "checkpoint D"
 
     ! Generate guess at density matrix - initial guess is G = zero
     ! and P = zero
@@ -119,6 +148,10 @@ subroutine hf_main(geom,basis)
     10 continue ! use this as a checkpoint for the loop
     ! Calculate G matrix  (in loop) - want to skip this portion the first time, going 
     ! to labeled line 11
+
+    !! use the subroutine that takes P and the two electron integrals to 
+    !! find G
+    call Compute_G(P,G)
 
     ! Find F = T + V + G
     11 continue

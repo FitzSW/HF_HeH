@@ -38,15 +38,15 @@ function new_contraction(M,orb_type,atom_name,coords,coeff_vec,expo_vec)
 
 
     allocate(new_contraction%contraction(M))
-    new_contraction%M = M
-    new_contraction%orb_type = orb_type
+    new_contraction%M         = M
+    new_contraction%orb_type  = orb_type
     new_contraction%atom_name = atom_name
-    new_contraction%coords = coords
+    new_contraction%coords    = coords
 
 
     do i = 1, M
         new_contraction%contraction(i)%coeff = coeff_vec(i)
-        new_contraction%contraction(i)%expo = expo_vec(i)
+        new_contraction%contraction(i)%expo  = expo_vec(i)
     enddo
 
 end function new_contraction
@@ -86,6 +86,5 @@ subroutine single_orb_printer(orb)
     write(*,*) ""
 
 end subroutine single_orb_printer
-
 
 end module orbitals

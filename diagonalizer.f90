@@ -10,6 +10,7 @@ subroutine x_finder(N,I,O)
     integer, intent(in)              :: N ! The size of the square matrix
     real, dimension(N,N), intent(in) :: I
 
+
     ! intermediate
     character*80 :: temp_file_1
     character*80 :: temp_file_2
@@ -34,6 +35,7 @@ subroutine x_finder(N,I,O)
     ! read the output into matrix O
     call matrix_reader(N,O,temp_file_2)
     call matrix_printer(N,O)
+    write(*,*) "checkpoint alpha"
 
     ! Call an executable that will read the matrix and diagonalize it,
     ! writing the output to "temp_file_2"
@@ -89,7 +91,7 @@ end subroutine eigen_finder
 subroutine matrix_writer(N,I,temp_file)
     implicit none
     integer, intent(in)              :: N
-    real, dimension(N,N),intent(in) :: I
+    real, dimension(N,N),intent(in)  :: I
     character*80, intent(in)         :: temp_file
     integer :: j
 
@@ -114,7 +116,7 @@ end subroutine matrix_printer
 subroutine matrix_reader(N,O,file_name)
     implicit none
     integer, intent(in)                :: N
-    real, dimension(:,:)  :: O ! needs intent(in)?
+    real, dimension(:,:)               :: O 
     ! 'file_name' *must* contain an N,N matrix of reals
     character*80, intent(in)           :: file_name
 
