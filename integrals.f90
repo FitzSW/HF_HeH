@@ -127,7 +127,8 @@ CONTAINS
             
               !case one
 
-              TE = (2*alpha_a/PI_16)**(3/4) * (2*alpha_b/PI_16)**(3/4) * (2*alpha_c/PI_16)**(3/4) * (2*alpha_d/PI_16) * ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q
+              TE = (2*alpha_a/PI_16)**(3/4) * (2*alpha_b/PI_16)**(3/4) * (2*alpha_c/PI_16)**(3/4) * (2*alpha_d/PI_16) &
+              * ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q
             
             ELSE
             
@@ -137,7 +138,8 @@ CONTAINS
 
               t1 = ((p*q)/(p+q))*DOT_PRODUCT(vec_new,vec_new)
 
-              TE = (2*alpha_a/PI_16)**(3/4) * (2*alpha_b/PI_16)**(3/4) * (2*alpha_c/PI_16)**(3/4) * (2*alpha_d/PI_16) * ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q*Function_0(t1)
+              TE = (2*alpha_a/PI_16)**(3/4) * (2*alpha_b/PI_16)**(3/4) * (2*alpha_c/PI_16)**(3/4) * (2*alpha_d/PI_16) &
+              * ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q*Function_0(t1)
 
             END IF
             
