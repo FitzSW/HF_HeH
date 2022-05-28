@@ -57,8 +57,6 @@ CONTAINS
                                                 WRITE(*,*) "Contraction:", mu,nu
                                                 
                                                 WRITE(*,*) "Primitives:", i,j
-                                                
-                                                WRITE(*,*) "Primitive Integral Value:", Overlap_Prim(mu,nu,i,j)
 
                                                 OM(mu,nu) = OM(mu,nu) + Overlap_Prim(mu,nu,i,j)
 
