@@ -119,7 +119,7 @@ CONTAINS
             !multiply a,b
             CALL Gauss_Multiply(alpha_a, alpha_b, R_a, R_b, konstant_p, R_p, p)
             !multiply c,d
-            CALL Gauus_Multiply(alpha_c, alpha_d, R_c, R_d, konstant_q, R_q, q)
+            CALL Gauss_Multiply(alpha_c, alpha_d, R_c, R_d, konstant_q, R_q, q)
             
             !There are two possible results for this integral based on if R_p and R_q are equal
             
