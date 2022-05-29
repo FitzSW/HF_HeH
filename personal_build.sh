@@ -15,3 +15,8 @@ gfortran diagonalizer.f90
 # c++ -std=c++20  -O3 -Wall -Wextra Matrix_IO/cc_eigen_finder.cc -o ./cc_eigen_finder
 
 gfortran main.f90 constants.f90 Gauss_Multiply.f90 F_0.f90 integrals.f90 orbitals.f90 reader.f90 Primitives.f90 Matrices.f90 diagonalizer.f90
+
+# ./a.out
+# rm a.out
+# rm S_out
+# rm -f temp_file_1 temp_file_2 temp_file_3

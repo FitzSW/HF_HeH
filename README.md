@@ -21,17 +21,15 @@ Some of the code in these files requires UNIX commands (eg. "wc" for counting
 file lines), and may not work if run without them.
 
 For linear algebra functionality, C++/Eigen is used, so it is assumed that you
-have a C++ compiler and it has access to the Eigen library header files. 
-If you don't
-have the header files,  then run either of the below commands depending if you
-are on a Mac or are on Linux (Midway preferred)
-``./mac_eigen.sh`` or ``./midway_eigen.sh``. 
-These will install the necessary files via git.  **Please make sure to
-do this *before* running the build script.** Then, inside the cloned
-directory, run one of the following commands: 
-``./mac_build.sh`` or ``./midway_build.sh``
-to build and execute the project. The results of the SCF procedure will be
- written to file in `hf_out.out`.
+have a C++ compiler and it has access to the Eigen library header files.  If
+you don't have the header files,  then run either of the below commands
+depending if you are on a Mac or are on Linux (Midway preferred)
+``./mac_eigen.sh`` or ``./midway_eigen.sh``.  These will install the necessary
+files via git.  **Please make sure to do this *before* running the build
+script.** Then, inside the cloned directory, run one of the following
+commands: ``./mac_build.sh`` or ``./midway_build.sh`` to build and execute the
+project. The results of the SCF procedure will be written to file in
+`hf_out.out`.
 
 
 ### References

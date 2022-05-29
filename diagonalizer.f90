@@ -106,7 +106,7 @@ subroutine matrix_writer(N,I,temp_file)
     character*80, intent(in)         :: temp_file
     integer :: j
 
-    open(unit=10,file=temp_file,access='sequential',status='unknown')
+    open(unit=10,file=temp_file,access='sequential',status='new',action="write")
     do j = 1, N
        write(10,*) I(j,:)
     enddo
@@ -132,7 +132,7 @@ subroutine matrix_reader(N,O,file_name)
     character*80, intent(in)            :: file_name
 
     allocate(O(N,N))
-    open(unit=66,file=file_name,status="old")
+    open(unit=66,file=file_name,status="old",action="read")
     read(66,*) O
     O = transpose(O)
 end subroutine matrix_reader
@@ -145,7 +145,7 @@ subroutine matrix_reader2(N,O,file_name)
     character*80, intent(in) :: file_name
 
     ! allocate(O(N,N))
-    open(unit=66,file=file_name,status="old")
+    open(unit=66,file=file_name,status="old",action="read")
     read(66,*) O
     O = transpose(O)
 end subroutine matrix_reader2
