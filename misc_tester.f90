@@ -79,12 +79,12 @@ program tester
     real, dimension(2,2)                          :: I
     real, dimension(2,2)                          :: E
 
-    ! call reader_test(N,orbs)
-    ! call orbitals_printer(N,orbs)
-    N = 2
+    call reader_test(N,orbs)
+    call orbitals_printer(N,orbs)
+    ! N = 2
     ! allocate(O(2,2))
-    I = reshape((/ -2.4397, -0.5158, -0.5158, -1.5387 /),shape(I))
-    call eigen_finder(N,I,O,E)
+    ! I = reshape((/ -2.4397, -0.5158, -0.5158, -1.5387 /),shape(I))
+    ! call eigen_finder(N,I,O,E)
 
     write(*,*) "did not crash"
 

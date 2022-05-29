@@ -12,15 +12,16 @@ subroutine x_finder(N,I,O)
 
 
     ! intermediate
+    ! character*80 :: S_out
     character*80 :: temp_file_1
     character*80 :: temp_file_2
     character*80 :: executable
 
     !output
-    real, dimension(:,:) :: O 
-
+    real, allocatable, dimension(:,:) :: O 
 
     ! Need to write the matrix to file
+    ! S_out       = "S_out"
     temp_file_1 = "temp_file_1"
     temp_file_2 = "temp_file_2"
     executable  = "./cc_x_finder"
@@ -34,8 +35,9 @@ subroutine x_finder(N,I,O)
 
     ! read the output into matrix O
     call matrix_reader(N,O,temp_file_2)
-    call matrix_printer(N,O)
     write(*,*) "checkpoint alpha"
+    call matrix_printer(N,O)
+    write(*,*) "checkpoint beta"
 
     ! Call an executable that will read the matrix and diagonalize it,
     ! writing the output to "temp_file_2"
@@ -77,8 +79,8 @@ subroutine eigen_finder(N,I,O,E)
     call execute_command_line(trim(executable))
 
     ! Read the output matrices
-    call matrix_reader(N,O,temp_file_2)
-    call matrix_reader(N,E,temp_file_3)
+    call matrix_reader2(N,O,temp_file_2)
+    call matrix_reader2(N,E,temp_file_3)
 
     ! Clean up the files
     call execute_command_line("rm temp_file_1")
@@ -115,17 +117,29 @@ end subroutine matrix_printer
 
 subroutine matrix_reader(N,O,file_name)
     implicit none
-    integer, intent(in)                :: N
-    real, dimension(:,:)               :: O 
+    integer, intent(in)                 :: N
+    real, allocatable, dimension(:,:)   :: O 
     ! 'file_name' *must* contain an N,N matrix of reals
-    character*80, intent(in)           :: file_name
+    character*80, intent(in)            :: file_name
 
-    ! allocate(O(N,N))
+    allocate(O(N,N))
     open(unit=66,file=file_name,status="unknown")
     read(66,*) O
     O = transpose(O)
 end subroutine matrix_reader
 
+subroutine matrix_reader2(N,O,file_name)
+    implicit none
+    integer, intent(in)      :: N
+    real, dimension(N,N)     :: O 
+    ! 'file_name' *must* contain an N,N matrix of reals
+    character*80, intent(in) :: file_name
+
+    ! allocate(O(N,N))
+    open(unit=66,file=file_name,status="unknown")
+    read(66,*) O
+    O = transpose(O)
+end subroutine matrix_reader2
 
 ! look up if saying G = 0 is acceptable array notation in Fortran
 subroutine G_init(N,G)

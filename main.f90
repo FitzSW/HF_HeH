@@ -116,9 +116,9 @@ subroutine hf_main(geom,basis)
     allocate(C_new(N,N))
     allocate(C_prime(N,N))
     allocate(H_core(N,N))
-    allocate(P(N,N))
+    ! allocate(P(N,N))
     allocate(P_new(N,N))
-    allocate(G(N,N))
+    ! allocate(G(N,N))
     ! allocate(V_tot(N,N))
     ! allocate(T(N,N))
     allocate(Ep(N,N))
@@ -132,12 +132,13 @@ subroutine hf_main(geom,basis)
     ! Diagonalize S to obtain X
 
     write(*,*) "checkpoint C"
-    call matrix_writer(N,S,S_out)
+    ! call matrix_writer(N,S,S_out)
 
+    ! allocate(X(N,N))
     call x_finder(N,S,X)
+    write(*,*) "checkpoint D"
     ! call hermitian_conjg(N,X,X_herm)
     X_herm = transpose(X)
-    write(*,*) "checkpoint D"
 
     ! Generate guess at density matrix - initial guess is G = zero
     ! and P = zero
