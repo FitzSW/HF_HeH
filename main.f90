@@ -28,7 +28,7 @@ character*80 basis
 
 
 geom = "./Opt/heh_geom.xyz"
-basis = "./Basis_Set/adapted_6-311G"
+basis = "./Basis_Set/adapted_STO-3G"
 
 
 ! The do-everything subroutine (pre-determined basis set)
