@@ -25,6 +25,10 @@ subroutine x_finder(N,I,O)
     temp_file_1 = "temp_file_1"
     temp_file_2 = "temp_file_2"
     executable  = "./cc_x_finder"
+                                                                      
+    call execute_command_line("rm -f temp_file_1")
+    call execute_command_line("rm -f temp_file_2")
+    call execute_command_line("rm -f temp_file_3")
 
     call matrix_writer(N,I,temp_file_1)
 
@@ -41,8 +45,9 @@ subroutine x_finder(N,I,O)
 
     ! Call an executable that will read the matrix and diagonalize it,
     ! writing the output to "temp_file_2"
-    call execute_command_line("rm temp_file_1")
-    call execute_command_line("rm temp_file_2")
+    call execute_command_line("rm -f temp_file_1")
+    call execute_command_line("rm -f temp_file_2")
+    call execute_command_line("rm -f temp_file_3")
 
 end subroutine x_finder
 
@@ -72,6 +77,10 @@ subroutine eigen_finder(N,I,O,E)
     temp_file_3 = "temp_file_3"
     executable  = "./cc_eigen_finder"
 
+    call execute_command_line("rm -f temp_file_1")
+    call execute_command_line("rm -f temp_file_2")
+    call execute_command_line("rm -f temp_file_3")
+
     ! Write down the input file to temp_file_1
     call matrix_writer(N,I,temp_file_1)
 
@@ -83,9 +92,9 @@ subroutine eigen_finder(N,I,O,E)
     call matrix_reader2(N,E,temp_file_3)
 
     ! Clean up the files
-    call execute_command_line("rm temp_file_1")
-    call execute_command_line("rm temp_file_2")
-    call execute_command_line("rm temp_file_3")
+    call execute_command_line("rm -f temp_file_1")
+    call execute_command_line("rm -f temp_file_2")
+    call execute_command_line("rm -f temp_file_3")
 
 end subroutine eigen_finder
 
@@ -123,7 +132,7 @@ subroutine matrix_reader(N,O,file_name)
     character*80, intent(in)            :: file_name
 
     allocate(O(N,N))
-    open(unit=66,file=file_name,status="unknown")
+    open(unit=66,file=file_name,status="old")
     read(66,*) O
     O = transpose(O)
 end subroutine matrix_reader
@@ -136,7 +145,7 @@ subroutine matrix_reader2(N,O,file_name)
     character*80, intent(in) :: file_name
 
     ! allocate(O(N,N))
-    open(unit=66,file=file_name,status="unknown")
+    open(unit=66,file=file_name,status="old")
     read(66,*) O
     O = transpose(O)
 end subroutine matrix_reader2

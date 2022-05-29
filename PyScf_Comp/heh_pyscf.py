@@ -1,7 +1,7 @@
 #! /home/ndohrmann/.conda/envs/local/bin/python3
 
 """
-A comparative calculation done on the same methane geometry with the 
+A comparative calculation done on the same Helium Hydride geometry with the 
 same basis set (6-311G) 
 """
 

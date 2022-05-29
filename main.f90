@@ -90,7 +90,11 @@ subroutine hf_main(geom,basis)
     S_out = "S_out"
 
     ! Set convergence tolerance
-    conv = 1e-4
+    conv = 1e-2
+
+    call execute_command_line("rm -f temp_file_1")
+    call execute_command_line("rm -f temp_file_2")
+    call execute_command_line("rm -f temp_file_3")
 
     ! initialize the system - ie. read in the geometry and basis set. 
     ! The orbitals should be collected into  a vector (called 'orbs') of the 'contracted-
@@ -132,7 +136,8 @@ subroutine hf_main(geom,basis)
     ! Diagonalize S to obtain X
 
     write(*,*) "checkpoint C"
-    ! call matrix_writer(N,S,S_out)
+    call execute_command_line("rm -f S_out")
+    call matrix_writer(N,S,S_out)
 
     ! allocate(X(N,N))
     call x_finder(N,S,X)

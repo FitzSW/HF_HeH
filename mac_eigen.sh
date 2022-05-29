@@ -9,7 +9,7 @@
 # Clone the full eigen directory
 git submodule add https://gitlab.com/libeigen/eigen
 # Select for the necessary files and delete the rest
-mv eigen/Eigen Matrix_IO
+mv eigen/* Matrix_IO
 rm -rf eigen
 
 sed -i '' -e 's/<Eigen\/Dense>/"Eigen\/Dense"/g' Matrix_IO/cc_x_finder.cc

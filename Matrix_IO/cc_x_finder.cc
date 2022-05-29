@@ -23,8 +23,10 @@ using namespace Eigen;
 
 int main() { 
 
+	cout << "cc_x starting\n";
 	// file string names
 	std::string in_file = "temp_file_1";
+	/* std::string in_file = "S_out"; */
 	std::string out_file = "temp_file_2";
 
 	// file streams
@@ -63,6 +65,9 @@ int main() {
 	}
 	inp.close();
 
+	cout << "(cc) Found file: in temp 1\n";
+	cout << B;
+
 	SelfAdjointEigenSolver<MatrixXd> es(B);
 
 	MatrixXd C(n,n);
@@ -71,6 +76,8 @@ int main() {
 
 	out << C << endl;
 	out.close();
+
+	cout << "\ncc_x ending\n";
 
 	return 0;
 }
