@@ -44,7 +44,7 @@ CONTAINS
                 type(contracted_gto), allocatable, dimension(:) :: orbs
 
                 !First, load in geometry and basis set        
-                geom = "./Opt/heh_geom.xyz"
+                geom = "./Opt/heh_Bohr_geom.xyz"
                 basis = "./Basis_Set/adapted_6-311G"
                 
                 CALL reader_sub(geom,basis,N,orbs)
@@ -86,7 +86,7 @@ CONTAINS
                 type(contracted_gto), allocatable, dimension(:) :: orbs
 
                 !First, load in geometry and basis set        
-                geom = "./Opt/heh_geom.xyz"
+                geom = "./Opt/heh_Bohr_geom.xyz"
                 basis = "./Basis_Set/adapted_6-311G"
                 
                 CALL reader_sub(geom,basis,N,orbs)
@@ -131,7 +131,7 @@ CONTAINS
                 type(contracted_gto), allocatable, dimension(:) :: orbs
 
                 !First, load in geometry and basis set        
-                geom = "./Opt/heh_geom.xyz"
+                geom = "./Opt/heh_Bohr_geom.xyz"
                 basis = "./Basis_Set/adapted_6-311G"
                 
                 CALL reader_sub(geom,basis,N,orbs)
@@ -155,13 +155,13 @@ CONTAINS
 
                         Z_c = 1.0
 
-                        R_c = (/0.0, 0.0, -0.517427/)
+                        R_c = (/0.0, 0.0, 0.0/)
 
                 ELSE IF (atom.eq."He") THEN
 
                         Z_c = 2.0
 
-                        R_c = (/0.0, 0.0, 0.258713/)
+                        R_c = (/0.0, 0.0, 1.4666919288/)
 
                 END If
 
@@ -193,7 +193,7 @@ CONTAINS
                 type(contracted_gto), allocatable, dimension(:) :: orbs
 
                 !First, load in geometry and basis set        
-                geom = "./Opt/heh_geom.xyz"
+                geom = "./Opt/heh_Bohr_geom.xyz"
                 basis = "./Basis_Set/adapted_6-311G"
                 
                 CALL reader_sub(geom,basis,N,orbs)
