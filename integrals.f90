@@ -41,7 +41,7 @@ CONTAINS
             
             Call Gauss_Multiply(alpha_a, alpha_b, R_a, R_b, konstant, R_p, p)
             
-            O = (2*alpha_a/PI_16)**(3/4) * (2*alpha_b/PI_16)**(3/4) * (PI_16/p)**(3/2) * konstant
+            O = ((2*alpha_a/PI_16)**(3/4)) * ((2*alpha_b/PI_16)**(3/4)) * ((PI_16/p)**(3/2)) * konstant
 
         END SUBROUTINE
         !--------------------------------
@@ -62,7 +62,7 @@ CONTAINS
             
             pref = (alpha_a*alpha_b/p)*(3-(2*alpha_a*alpha_b/p)*DOT_PRODUCT(vec_new, vec_new))
             
-            K = (2*alpha_a/PI_16)**(3/4) * (2*alpha_b/PI_16)**(3/4) * pref * (PI_16/p)**(3/2) * konstant
+            K = ((2*alpha_a/PI_16)**(3/4)) * ((2*alpha_b/PI_16)**(3/4)) * pref * ((PI_16/p)**(3/2)) * konstant
 
         END SUBROUTINE
         !--------------------------------
@@ -87,7 +87,7 @@ CONTAINS
             
             IF (ALL(R_p.eq.R_c)) THEN
             
-                V = -1 * (2*alpha_a/PI_16)**(3/4) * (2*alpha_b/PI_16)**(3/4) * (2*PI_16/p)*Z_c*konstant
+                V = -1 * ((2*alpha_a/PI_16)**(3/4)) * ((2*alpha_b/PI_16)**(3/4)) * (2*PI_16/p)*Z_c*konstant
             
             ELSE 
 
@@ -95,7 +95,7 @@ CONTAINS
 
                 t1 = p*DOT_PRODUCT(vec_new,vec_new)
                 
-                V = -1 * (2*alpha_a/PI_16)**(3/4) * (2*alpha_b/PI_16)**(3/4) * (2*PI_16/p)*Z_c*konstant*Function_0(t1)
+                V = -1 * ((2*alpha_a/PI_16)**(3/4)) * ((2*alpha_b/PI_16)**(3/4)) * (2*PI_16/p)*Z_c*konstant*Function_0(t1)
 
             END IF
             
@@ -127,8 +127,8 @@ CONTAINS
             
               !case one
 
-              TE = (2*alpha_a/PI_16)**(3/4) * (2*alpha_b/PI_16)**(3/4) * (2*alpha_c/PI_16)**(3/4) * (2*alpha_d/PI_16) &
-              * ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q
+              TE = ((2*alpha_a/PI_16)**(3/4)) * ((2*alpha_b/PI_16)**(3/4)) * ((2*alpha_c/PI_16)**(3/4)) *
+              * ((2*alpha_d/PI_16)**(3/4)) * ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q
             
             ELSE
             
@@ -138,8 +138,8 @@ CONTAINS
 
               t1 = ((p*q)/(p+q))*DOT_PRODUCT(vec_new,vec_new)
 
-              TE = (2*alpha_a/PI_16)**(3/4) * (2*alpha_b/PI_16)**(3/4) * (2*alpha_c/PI_16)**(3/4) * (2*alpha_d/PI_16) &
-              * ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q*Function_0(t1)
+              TE = ((2*alpha_a/PI_16)**(3/4)) * ((2*alpha_b/PI_16)**(3/4)) * ((2*alpha_c/PI_16)**(3/4)) &
+              * ((2*alpha_d/PI_16)**(3/4)) * ((2*PI_16**(5/2))/(p*q*SQRT(p+q)))*konstant_p*konstant_q*Function_0(t1)
 
             END IF
             
