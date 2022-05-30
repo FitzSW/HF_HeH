@@ -174,75 +174,131 @@ CONTAINS
 
 
 
-        SUBROUTINE Compute_G(P, GM)
+        SUBROUTINE Compute_Tensor(Ten1)
 
                 IMPLICIT NONE
 
-                REAL, dimension(6,6), intent(in) :: P !Density matrix
+                REAL, dimension(6,6,6,6), intent(out) :: Ten1
 
-                REAL, dimension(6,6), intent(out) :: GM
+                INTEGER :: a,b,c,d,i,j,k,l,i_f,j_f,k_f,l_f
 
-                INTEGER :: mu,nu,lambda,sigma,i,j,k,l,i_f,j_f,k_f,l_f
 
-                
-                DO mu = 1,6
-                        
-                        !specificy length of contraction for mu
-                        IF ((mu.eq.1).or.(mu.eq.4)) THEN
+
+                !populate tensor
+
+                DO a=1,6
+                        DO b=1,6
+                                DO c = 1,6
+                                        DO d = 1,6
+
+                                                Ten1(a,b,c,d) = 0
+                                        END DO
+                                END DO
+                        END DO
+                END DO
+
+
+                !first, compute two two electron tensors
+
+                DO a = 1, 6
+
+                        IF ((a.eq.1).or.(a.eq.4)) THEN
                                 i_f = 3
                         ELSE
-                                i_f=1
+                                i_f = 1
                         END IF
 
-                        DO nu = 1,6
-                                
-                                !specificy length of contraction
-                                IF ((nu.eq.1).or.(nu.eq.4)) THEN
+                        DO b=1,6
+
+                                IF ((b.eq.1).or.(b.eq.4)) THEN
                                         j_f = 3
                                 ELSE
                                         j_f = 1
                                 END IF
 
-                                DO lambda = 1,6
-
-                                        !specify length of contraction
-                                        IF ((lambda.eq.1).or.(lambda.eq.4)) THEN
+                                DO c = 1,6
+                                        
+                                        IF ((c.eq.1).or.(c.eq.4)) THEN
                                                 k_f = 3
                                         ELSE
                                                 k_f = 1
                                         END IF
 
-                                        DO sigma = 1,6
-                                                
-                                                !specificy length of contraction
-                                                IF ((sigma.eq.1).or.(sigma.eq.4)) THEN
+                                        DO d = 1,6
+
+                                                IF ((d.eq.1).or.(d.eq.4)) THEN
                                                         l_f = 3
                                                 ELSE
                                                         l_f = 1
                                                 END IF
 
-                                                
-                                                !iterate over primitives
+
+
 
                                                 DO i = 1,i_f
-                                                        DO j = 1,j_f
-                                                                DO k = 1, k_f
-                                                                        DO l = 1, l_f
-                                                                
-                                                                GM(mu,nu) = GM(mu,nu) + &
-                                                                P(lambda,sigma)*(Two_Electron_Prim(mu,nu,lambda,sigma,i,j,k,l)&
-                                                                - (1/2) * Two_Electron_Prim(mu,lambda,sigma,nu,i,k,l,j))
+
+                                                        DO j=1, j_f
+                                                                DO k=1,k_f
+                                                                        DO l=1,l_f
+
+
+                                                                                Ten1(a,b,c,d) =  Ten1(a,b,c,d) &
+                                                                                + Two_Electron_Prim(a,b,c,d,i,j,k,l)
                                                                                 
 
-                                                                        END DO
 
+                                                                        END DO
                                                                 END DO
                                                         END DO
+
                                                 END DO
+
+                                        END DO
+
+                                END DO
+                        END DO
+
+                END DO
+
+        
+        END SUBROUTINE
+
+
+
+        SUBROUTINE Compute_G(P, GM)
+                
+                IMPLICIT NONE
+
+                REAL, dimension(6,6), intent(in) :: P
+
+                REAL, dimension(6,6), intent(out) :: GM
+
+                REAL, dimension(6,6,6,6) :: Ten1
+
+                INTEGER :: mu, nu, lambda, sigma
+
+
+                DO mu = 1,6
+                        DO nu = 1,6
+                                DO lambda = 1,6
+                                        DO sigma = 1,6
+
+                                                CALL Compute_Tensor(Ten1)
+
+                                                GM(mu,nu) = GM(mu,nu) + P(lambda,sigma) * &
+                                                (Ten1(mu,nu,sigma,lambda) &
+                                                - 0.5*Ten1(mu,lambda,sigma,nu))
+
+
+
+
                                         END DO
                                 END DO
                         END DO
                 END DO
+
+
+
         END SUBROUTINE
                                         
 
