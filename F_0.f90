@@ -6,14 +6,14 @@ MODULE F_0
 
 CONTAINS
 
-        REAL FUNCTION Function_0(t)
+        FUNCTION Function_0(t) result(F) 
 
                 REAL, intent(in) :: t
 
                 REAL :: F
 
 
-                F = (1/2)*((PI_16/t)**(1/2))*ERF(SQRT(T))
+                F = (0.5)*((PI_16/t)**(0.5))*ERF(SQRT(t))
 
 
         END FUNCTION
