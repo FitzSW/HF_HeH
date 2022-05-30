@@ -250,9 +250,29 @@ CONTAINS
                         
 
 
+
+subroutine alternate_G(N,G,P,orbs)
+    implicit none
+    integer, intent(in)                            :: N
+    type(contracted_gto), dimension(N), intent(in) :: orbs
+    real, dimension(N,N), intent(inout)            :: G
+    real, dimension(N,N), intent(in)               :: P
+    real                                           :: loc_P, J, K, G_sum
+    integer                                        :: i, j, k, l
+    do i = 1, N
+        do j = 1, N
+            G_sum = 0.0
+            do k = 1, N
+                do l = 1, N
+                    loc_P = P(k,l)
+                    call TE(J,orbs,N,i,j,k,l)
+                    call TE(K,orbs,N,i,l,k,j)
+                    G_sum = G_sum  + loc_P * (J - 0.5 * K)
+                enddo
+            enddo
+            G(i,j) = G_sum
+        enddo
+    enddo
+end subroutine alternate_G
+
 END MODULE
-
-                
-
-
-

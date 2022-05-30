@@ -223,4 +223,25 @@ CONTAINS
                 answer = TE * coeff_a * coeff_b * coeff_c * coeff_d
 
         END FUNCTION
+
+subroutine TE(W,orbs,i,j,k,l)
+    implicit none
+    integer, intent(in)                  :: N, i, j, k, l
+    type(contracted_gto), dimension(N,N) :: orbs
+    real                                 :: W
+    type(contracted_gto)                 :: A, B, C, D
+    real                                 :: alpha, beta, gamm, delta
+    integer                              :: M1, M2, M3, M4
+
+
+end subroutine TE
+
+
+
+    
+
+
+
+
+
 END MODULE
