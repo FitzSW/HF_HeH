@@ -224,23 +224,29 @@ CONTAINS
 
         END FUNCTION
 
-subroutine TE(W,orbs,i,j,k,l)
-    implicit none
-    integer, intent(in)                  :: N, i, j, k, l
-    type(contracted_gto), dimension(N,N) :: orbs
-    real                                 :: W
-    type(contracted_gto)                 :: A, B, C, D
-    real                                 :: alpha, beta, gamm, delta
-    integer                              :: M1, M2, M3, M4
+! subroutine TE(W,orbs,i,j,k,l)
+!     implicit none
+!     integer, intent(in)                  :: N, i, j, k, l
+!     type(contracted_gto), dimension(N,N) :: orbs
+!     real                                 :: W
+!     type(contracted_gto)                 :: A, B, C, D
+!     real                                 :: alpha, beta, gamm, delta
+!     integer                              :: M1, M2, M3, M4
+!     integer                              :: c1, c2, c3, c4
+
+!     do c1 = 1, M1
+!         do c2 = 1, M2
+!             do c3 = 1, M3
+!                 do c4 = 1, M4
+!                     ! get normalized two elec product (from each primitive) here?
+
+!                 enddo
+!             enddo
+!         enddo
+!     enddo
 
 
-end subroutine TE
-
-
-
-    
-
-
+! end subroutine TE
 
 
 

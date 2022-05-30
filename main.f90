@@ -28,7 +28,7 @@ character*80 basis
 
 
 geom = "./Opt/heh_Bohr_geom.xyz"
-basis = "./Basis_Set/adapted_6-311G"
+basis = "./Basis_Set/adapted_STO-3G"
 
 
 ! The do-everything subroutine (pre-determined basis set)
@@ -85,9 +85,13 @@ subroutine hf_main(geom,basis)
     real         :: total_energy
     character*80 :: output_file
     character*80 :: S_out
+    character*80 :: P_out
+    character*80 :: JK
 
     ! Dummy file for printing out de-bug matrices
     S_out = "S_out"
+    P_out = "P_out"
+    JK    = "JK"
 
     ! Set convergence tolerance
     conv = 1e-2
@@ -161,6 +165,12 @@ subroutine hf_main(geom,basis)
 
     !! use the subroutine that takes P and the two electron integrals to 
     !! find G
+
+    ! call matrix_write(N,P,P_out)
+    ! call execute_command_line("./JK_solver.py")
+    ! call matrix_reader2(N,G,JK)
+    ! call execute_command_line("rm -f JK")
+
     call Compute_G(P,G)
 
     ! Find F = T + V + G

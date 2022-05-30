@@ -54,7 +54,7 @@ subroutine reader_test(N,orbs)
     integer :: N
 
     geom = "./Opt/heh_geom.xyz"
-    basis = "./Basis_Set/adapted_6-311G"
+    basis = "./Basis_Set/adapted_STO-3G"
 
     call reader_sub(geom,basis,N,orbs)
 
