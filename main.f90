@@ -99,7 +99,7 @@ subroutine hf_main(geom,basis)
     JK    = "JK"
 
     ! Set convergence tolerance
-    conv = 1e-2
+    conv = 1e-3
 
     call execute_command_line("rm -f temp_file_1")
     call execute_command_line("rm -f temp_file_2")
@@ -183,6 +183,7 @@ subroutine hf_main(geom,basis)
     !! use the subroutine that takes P and the two electron integrals to 
     !! find G
 
+<<<<<<< HEAD
     ! call matrix_write(N,P,P_out)
     ! call execute_command_line("./JK_solver.py")
     ! call matrix_reader2(N,G,JK)
@@ -195,6 +196,10 @@ subroutine hf_main(geom,basis)
     write(*,*) "G"
     call matrix_printer(N,G)
 
+=======
+    call Compute_Tensor(Tens)
+    call Compute_G(P,G,Tens)
+>>>>>>> Test
 
     ! Find F = T + V + G
     11 continue
