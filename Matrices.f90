@@ -24,20 +24,35 @@ CONTAINS
         SUBROUTINE Compute_Overlap(OM)
 
 
-                REAL, dimension(2,2), intent(out) :: OM
+                REAL, dimension(6,6), intent(out) :: OM
 
                 INTEGER :: mu,nu,i,j,i_f,j_f
 
 
-                DO mu = 1, 2
+                DO mu = 1, 6
                         
+                        !Specify length of contraction for mu
+                        IF ((mu.eq.1).or.(mu.eq.4)) THEN
+                                i_f = 3
 
-                        DO nu = 1,2
+                        ELSE
+                                i_f = 1
+
+                        END IF
+
+                        DO nu = 1,6
                                 
+                                !Specificy length of contraction for nu
+                                IF ((nu.eq.1).or.(nu.eq.4)) THEN
+                                        j_f = 3
+                                ELSE
+                                        j_f = 1
+                                        
+                                END IF
                                 !Iterate over the length of both contractions in order to compute matrix element
-                                DO i = 1, 3
+                                DO i = 1, i_f
 
-                                        DO j = 1, 3
+                                        DO j = 1, j_f
                                                 
 
                                                 OM(mu,nu) = OM(mu,nu) + Overlap_Prim(mu,nu,i,j)
@@ -58,20 +73,35 @@ CONTAINS
         SUBROUTINE Compute_Kinetic(KM)
 
         
-                REAL, dimension(2,2), intent(out) :: KM
+                REAL, dimension(6,6), intent(out) :: KM
 
                 INTEGER :: mu, nu, i, j, i_f, j_f
 
                
-                DO mu = 1, 2
+                DO mu = 1, 6
                         
+                        !Specify length of contraction for mu
+                        IF ((mu.eq.1).or.(mu.eq.4)) THEN
+                                i_f = 3
 
-                        DO nu = 1,2
+                        ELSE
+                                i_f = 1
+
+                        END IF
+
+                        DO nu = 1,6
                                 
+                                !Specificy length of contraction for nu
+                                IF ((nu.eq.1).or.(nu.eq.4)) THEN
+                                        j_f = 3
+                                ELSE
+                                        j_f = 1
+                                        
+                                END IF
                                 !Iterate over the length of both contractions in order to compute matrix element
-                                DO i = 1, 3
+                                DO i = 1, i_f
 
-                                        DO j = 1, 3
+                                        DO j = 1, j_f
 
                                                 KM(mu,nu) = KM(mu,nu) + Kinetic_Prim(mu,nu,i,j)
 
@@ -88,30 +118,51 @@ CONTAINS
 
 
 
-        SUBROUTINE  Compute_Potential(PM, Z_c, R_c)
+        SUBROUTINE  Compute_Potential(PM)
 
                 
-                REAL, dimension(2,2), intent(out) :: PM
-                INTEGER :: mu,nu,i,j
-                REAL :: Z_c
-                REAL, dimension(3) :: R_c
+                REAL, dimension(6,6), intent(out) :: PM
+                INTEGER :: mu,nu,i,j,i_f,j_f, ai
+                CHARACTER(len=2) :: atom
+                CHARACTER(len=2), dimension(2) :: atom_list
+
+
+                atom_list = (/'H+', 'He'/)
+
+
+                DO ai = 1,2
+                        
+                        atom = atom_list(ai) 
                         
                         
-                DO mu = 1, 2
+                        DO mu = 1, 6
                                 
+                                !Specify length of contraction for mu
+                                IF ((mu.eq.1).or.(mu.eq.4)) THEN
+                                        i_f = 3
 
-                        DO nu = 1,2
+                                ELSE
+                                        i_f = 1
+
+                                END IF
+
+                                DO nu = 1,6
                                         
-                                !Iterate over the length of both contractions in order to compute matrix element
-                                DO i = 1, 3
+                                        !Specificy length of contraction for nu
+                                        IF ((nu.eq.1).or.(nu.eq.4)) THEN
+                                                j_f = 3
+                                        ELSE
+                                                j_f = 1
+                                                
+                                        END IF
+                                        !Iterate over the length of both contractions in order to compute matrix element
+                                        DO i = 1, i_f
 
-                                        DO j = 1, 3
+                                                DO j = 1, j_f
 
-                                                PM(mu,nu) = PM(mu,nu) + Potential_Prim(mu,nu,i,j, Z_c, R_c)
+                                                        PM(mu,nu) = PM(mu,nu) + Potential_Prim(mu,nu,i,j, atom)
 
-                                   
-
-                         
+                                                END DO
 
                                         END DO
                                 END DO
@@ -120,34 +171,13 @@ CONTAINS
 
 
         END SUBROUTINE
-        
 
-        SUBROUTINE Two_Tensor(Tens)
 
-                REAL, dimension(2,2,2,2), intent(out) :: Tens
 
-<<<<<<< HEAD
-                REAL :: V1111,V2111,V2121,V2211,V2221,V2222
-=======
         SUBROUTINE Compute_Tensor(Ten1)
->>>>>>> Test
 
+                IMPLICIT NONE
 
-<<<<<<< HEAD
-                V1111 = 1.307152
-                V2111 = 0.437279
-                V2211 = 0.605703
-                V2121 = 0.177267
-                V2221 = 0.311795
-                V2222 = 0.774608
-
-
-                Tens(1,1,1,1) = V1111
-
-                Tens(2,1,1,1) = V2111
-
-                Tens(1,2,1,1) = V2111
-=======
                 REAL, dimension(6,6,6,6), intent(out) :: Ten1
 
                 INTEGER :: a,b,c,d,i,j,k,l,i_f,j_f,k_f,l_f
@@ -278,70 +308,14 @@ CONTAINS
 
         END SUBROUTINE
                                         
->>>>>>> Test
-
-                Tens(1,1,2,1) = V2111
-
-                Tens(1,1,1,2) = V2111
-
-                Tens(2,1,2,1) = V2121
-
-                Tens(1,2,2,1) = V2121
-
-                Tens(2,1,1,2) = V2121
-
-                Tens(1,2,1,2) = V2121
-
-                Tens(2,2,1,1) = V2211
-
-                Tens(1,1,2,2) = V2211
-
-                Tens(2,2,2,1) = V2221
-
-                Tens(2,2,1,2) = V2221
-
-                Tens(2,1,2,2) = V2221
-
-                Tens(1,2,2,2) = V2221
-
-                Tens(2,2,2,2) = V2222
 
 
-
-
-        END SUBROUTINE Two_Tensor
-
-
-        SUBROUTINE FORMG(Tens, GM, P)
-
-                REAL, dimension(2,2,2,2), intent(in) :: Tens
-
-                REAL, dimension(2,2), intent(in) :: P
-
-                REAL, dimension(2,2), intent(inout) :: GM
-
-                INTEGER :: i,j,k,l
-
-                DO I=1,2
-                DO J=1,2
-                GM(I,J) = 0
-                END DO 
-                END DO
-
-
-                DO I=1,2
-                DO J=1,2
-                DO K=1,2
-                DO L=1,2
-                GM(I,J) = GM(I,J) + P(K,L)*(Tens(I,J,K,L) - 0.5*Tens(I,L,K,J))
-
-                END DO
-                END DO
-                END DO
-                END DO
-
-        END SUBROUTINE
-
+                        
 
 
 END MODULE
+
+                
+
+
+

@@ -69,7 +69,7 @@
 \preprint{AIP/123-QED}
 
 \title[MENG 25510 Final]{MENG 25510 Final Report:\\ Hartree-Fock on
-HeH$^{+}$ with 6-311G and STO-3G}
+HeH$^{+}$ with 6-311G}
 % Force line breaks with \\
 \author{N.\ R.\ Dohrmann and S.\ W.\ Fitz}
  % \altaffiliation{University of Chicago, The College}%Lines break automatically or can be forced with \\
@@ -90,8 +90,7 @@ for this project.
 This is a reference document to go with our submission for the MENG 25510
 final coding project, for which we chose to implement the Hartree-Fock (HF)
 Self-Consistent Field (SCF) method on a HeH$^{+}$ molecular system using the
-6-311G basis set on both atoms for one round of calculations, and STO-3G for
-another. The geometry at which we performed the
+6-311G basis set on both atoms. The geometry at which we performed the
 calculation was optimized at the CCSD/aug-cc-pZTZ level of theory using
 Gaussian 16\cite{g16}. The result of our code is then compared to an energy
 found with
@@ -169,25 +168,9 @@ to build and execute the project. The results of the SCF procedure will be
  written to file in {\code hf\_out.out}.
 
 \section{Results and Discussion}
-Unfortunately, our code is seen to suffer from some numerical problems, most
-likely in the computation of the four index integrals $\left(\mu\nu |
-\sigma\lambda\right)$. Independent verification against the correct values for
-$\bold{S}$ and $\bold{H}^{\text{core}}$ from PySCF show that our code computes
-these store integral matrices correctly.  We suspect that the issue stems from
-either normalization or indexing problems present in our evaluation of the two
-electron integrals.  Within the original version of the code that uses 6-311G,
-we found a final electronic energy of +14.629 with a nuclear repulsion energy
-of +1.36
-for a total molecular energy of 15.99 [Ha.]. Immediately one sees that a
-\emph{positive} electronic energy value is obtained, which tells us that the
-SCF procedure did not converge on the correct value. Please see a comparison of our
-resulting energy to the expected PySCF value and a higher-quality CCSD
-calculation  in Table \ref{tab:hf_results}. 
-
-In order to gauge whether the rest of the code functions as intended, we have
-decided to do a comparison calculation with STO-3G, following the integration
-procedure given in Szabo and Ostlund\cite{szabo2012modern}. These results are
-also presented in Table \ref{tab:hf_results}.
+We found a final electronic energy of () with a nuclear repulsion energy of
+() for a total molecular energy of () [Ha.]. Please see a comparison of our
+results to the benchmark and PySCF values in Table \ref{tab:hf_results}.
 
 \begin{table}[]
 \caption{HF Results Comparison on HeH$^{+}$ by Method}
@@ -197,13 +180,11 @@ also presented in Table \ref{tab:hf_results}.
 \hline
 \multicolumn{1}{|l|}{\textbf{Method / Data Source}} &
 \multicolumn{1}{c|}{\textbf{Bond Length\footnote{Optimzed with
-CCSD/aug-cc-pVTZ, this value used with all subsequent calculations.} [Å] \ \ \ \ }} 
+CCSD/aug-cc-pVTZ, this value used with both HF/6-311G calculations.} [Å] \ \ \ \ }} 
 & \multicolumn{1}{l|}{\textbf{Total $E_0$, [Ha.]}} \\ \hline
 CCSD/aug-cc-pVTZ\footnote{Gaussian 16}      & .776140  & -2.9753932    \\ \hline 
 HF/6-311G\footnote{PySCF}     & .776140     & -2.9164905    \\ \hline
-HF/6-311G\footnote{This Report}  & .776140  &  +15.993315        \\ \hline
-HF/STO-3G$^{\text{c}}$ & .776140 & -2.8421947 \\ \hline
-HF/STO-3G$^{\text{d}}$ & .776140 & \\ \hline
+HF/6-311G\footnote{This Report}  & .776140  &          \\ \hline
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -211,21 +192,19 @@ HF/STO-3G$^{\text{d}}$ & .776140 & \\ \hline
 
 \section{Conclusion}
 If this project were to be extended for more general use, the basis sets and
-geometries of additional systems could easily be read into the main program in
-the current state of the code. A longer process of debugging and revisions
-would be necessary to correctly obtain the four-index integrals with the
-larger basis set. The main area
-for improvement aside from this that would have to be more thoroughly adapted
-from the current state of the project are the evaluation of molecular
-integrals involving atomic orbitals of angular momentum $l > 0$, which are
-much more complex in their evaluation than the $s$ type orbitals that are
-considered in this report. Additionally, there is further room for
-optimization in the linear algebra functionality of this project. Currently,
-matrices must be written to file, processed, and read back into the main
-executable at the start of the program and at each stage of the SCF cycle.
-Clearly, this is not the most efficient way to handle matrix computations, and
-an improved code would ideally include LAPACK functions and subroutines to be
-used within Fortran itself.
+geometries of additional systems could easily be read into the main program
+in the current state of the code. The main area for improvement that would
+have to be more thoroughly adapted are the evaluation of molecular integrals 
+involving atomic orbitals of angular momentum $l > 0$, which are much more
+complex in their evaluation than the $s$ type orbitals that are considered in
+this report. Additionally, there is further room for optimization in the
+linear algebra functionality of this project. Currently, matrices must be
+written to file, processed, and read back into the main executable at the
+start of the program and at each stage of the SCF cycle. Clearly, this is not
+the most efficient way to handle matrix computations, and an improved code
+would ideally include LAPACK functions and subroutines to be used within
+Fortran itself.
+
 
 % \nocite{*}
 \bibliography{sources}

@@ -45,7 +45,7 @@ CONTAINS
 
                 !First, load in geometry and basis set        
                 geom = "./Opt/heh_Bohr_geom.xyz"
-                basis = "./Basis_Set/adapted_STO-3G"
+                basis = "./Basis_Set/adapted_6-311G"
                 
                 CALL reader_sub(geom,basis,N,orbs)
                 
@@ -54,14 +54,11 @@ CONTAINS
                 alpha_a = orbs(mu)%contraction(i)%expo
                 alpha_b = orbs(nu)%contraction(j)%expo
 
-               
-
                 R_a = orbs(mu)%coords
                 R_b = orbs(nu)%coords
-
+                
                 coeff_a = orbs(mu)%contraction(i)%coeff
                 coeff_b = orbs(nu)%contraction(j)%coeff
-
                
                 !Finally, compute the value of the overlap integral for those two orbitals 
                 CALL Overlap(alpha_a,alpha_b,R_a,R_b, O)
@@ -90,7 +87,7 @@ CONTAINS
 
                 !First, load in geometry and basis set        
                 geom = "./Opt/heh_Bohr_geom.xyz"
-                basis = "./Basis_Set/adapted_STO-3G"
+                basis = "./Basis_Set/adapted_6-311G"
                 
                 CALL reader_sub(geom,basis,N,orbs)
 
@@ -113,11 +110,13 @@ CONTAINS
          END FUNCTION
 
         
-         FUNCTION Potential_Prim(mu, nu, i,j, Z_c, R_c) result(answer)
+         FUNCTION Potential_Prim(mu, nu, i,j, atom) result(answer)
 
                 IMPLICIT NONE
 
                 INTEGER, intent(in) :: i,j, mu,nu
+
+                CHARACTER*2, intent(in) :: atom
 
                 REAL :: alpha_a, alpha_b, answer, Z_c, V, coeff_a, coeff_b
 
@@ -133,7 +132,7 @@ CONTAINS
 
                 !First, load in geometry and basis set        
                 geom = "./Opt/heh_Bohr_geom.xyz"
-                basis = "./Basis_Set/adapted_STO-3G"
+                basis = "./Basis_Set/adapted_6-311G"
                 
                 CALL reader_sub(geom,basis,N,orbs)
 
@@ -151,6 +150,20 @@ CONTAINS
 
 
                 !For potential integral, will need the atomic number and center of desired atom
+
+                IF (atom.eq."H+") THEN
+
+                        Z_c = 1.0
+
+                        R_c = (/0.0, 0.0, 0.0/)
+
+                ELSE IF (atom.eq."He") THEN
+
+                        Z_c = 2.0
+
+                        R_c = (/0.0, 0.0, 1.4666919288/)
+
+                END If
 
                 !Finally, compute the value of the potential integral for those two orbitals 
                 CALL Potential(alpha_a,alpha_b,R_a,R_b, R_c, Z_c, V)
@@ -181,7 +194,7 @@ CONTAINS
 
                 !First, load in geometry and basis set        
                 geom = "./Opt/heh_Bohr_geom.xyz"
-                basis = "./Basis_Set/adapted_STO-3G"
+                basis = "./Basis_Set/adapted_6-311G"
                 
                 CALL reader_sub(geom,basis,N,orbs)
 
@@ -210,8 +223,4 @@ CONTAINS
                 answer = TE * coeff_a * coeff_b * coeff_c * coeff_d
 
         END FUNCTION
-
-
-
-
 END MODULE

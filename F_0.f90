@@ -12,17 +12,8 @@ CONTAINS
 
                 REAL :: F
 
-                if (t.lt.1.0D-6) GO TO 10
 
-
-                F = (0.5)*SQRT(PI_16/t)*ERF(SQRT(t))
-
-                GOTO 20
-
-
-            10  F = 1.0D0 - t/3.0D0
-
-            20 CONTINUE
+                F = (0.5)*((PI_16/t)**(0.5))*ERF(SQRT(t))
 
 
         END FUNCTION
