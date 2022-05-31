@@ -78,26 +78,21 @@ CONTAINS
             REAL, intent(out) :: V
             
             REAL :: konstant, p, t1
-            REAL, dimension(3) :: R_p, vec_new
+            REAL, dimension(3) :: R_p, vec_newv
             
             CALL Gauss_Multiply(alpha_a, alpha_b, R_a, R_b, konstant, R_p, p)
             
             !Szabo and Ostlund don't mention these two cases, but another report I found does, so I will include them just in case
             !To be clear, Szabo and Ostlund just includes the R_p != R_c case
             
-            IF (ALL(R_p.eq.R_c)) THEN
-            
-                V = -1. * ((2.*alpha_a/PI_16)**(3./4.)) * ((2.*alpha_b/PI_16)**(3./4.)) * (2.*PI_16/p)*Z_c*konstant
-            
-            ELSE 
 
-                vec_new = R_p - R_c
+            vec_newv = R_p - R_c
 
-                t1 = p*DOT_PRODUCT(vec_new,vec_new)
+            t1 = p*DOT_PRODUCT(vec_newv,vec_newv)
                 
-                V = -1. * ((2.*alpha_a/PI_16)**(3./4.)) * ((2.*alpha_b/PI_16)**(3./4.)) * (2.*PI_16/p)*Z_c*konstant*Function_0(t1)
+            V = ((2.*alpha_a/PI_16)**(3./4.)) * ((2.*alpha_b/PI_16)**(3./4.)) * (2.*PI_16/p)*konstant*Function_0(t1)
 
-            END IF
+            V = -V * Z_c
             
             
             

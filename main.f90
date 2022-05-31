@@ -12,6 +12,7 @@ use reader
 use primitive
 use Matrices
 use diagonalizer
+use diag
 implicit none
 
 ! Needed functionalities:
@@ -46,6 +47,7 @@ subroutine hf_main(geom,basis)
     use primitive
     use Matrices
     use diagonalizer
+    use diag
     implicit none
 
     ! input 
@@ -60,7 +62,7 @@ subroutine hf_main(geom,basis)
     real, allocatable, dimension(:,:) :: X
     real, allocatable, dimension(:,:) :: X_herm
     real, allocatable, dimension(:,:) :: T
-    real, allocatable, dimension(:,:) :: V_tot
+    real, allocatable, dimension(:,:) :: V1, V2
     real, allocatable, dimension(:,:) :: H_core
     real, allocatable, dimension(:,:) :: TE ! Two electron
     real, allocatable, dimension(:,:) :: F
@@ -72,6 +74,7 @@ subroutine hf_main(geom,basis)
     real, allocatable, dimension(:,:) :: C_prime
     real, allocatable, dimension(:,:) :: C_new
     real, allocatable, dimension(:,:) :: Ep
+    real, dimension(6,6,6,6) :: Tens
 
     ! Values for determining matrix convergence
     real    :: diff, conv
@@ -87,6 +90,8 @@ subroutine hf_main(geom,basis)
     character*80 :: S_out
     character*80 :: P_out
     character*80 :: JK
+
+    real, dimension(3) :: R_c1, R_c2
 
     ! Dummy file for printing out de-bug matrices
     S_out = "S_out"
@@ -113,12 +118,23 @@ subroutine hf_main(geom,basis)
     ! allocate(S(N,N))
     call G_init(N,S)
     call G_init(N,T)
-    call G_init(N,V_tot)
+    call G_init(N,V1)
+    call G_init(N,V2)
     ! allocate(T(N,N))
     ! allocate(V_tot(N,N))
     call Compute_Overlap(S)
     call Compute_Kinetic(T)
-    call Compute_Potential(V_tot)
+
+    
+    R_c1 = (/0.0,0.0,1.4632/)
+    R_c2 = (/0.0,0.0,0.0/)
+
+    call Compute_Potential(V1,2.0,R_c2)
+    call Compute_Potential(V2,1.0,R_c1)
+    write(*,*) "V1"
+    call matrix_printer(N, V1)
+    write(*,*) "V2"
+    call matrix_printer(N,V2)
     write(*,*) "checkpoint B"
 
     ! Allocate remaining matrices
@@ -139,7 +155,10 @@ subroutine hf_main(geom,basis)
     cycle_num = cycle_num + 1
 
     ! Calculate the core Hamiltonian
-    H_core = T + V_tot
+    H_core = T + V1 + V2
+
+    write(*,*) "H_core"
+    call matrix_printer(N,H_core)
 
     ! Diagonalize S to obtain X
 
@@ -150,8 +169,6 @@ subroutine hf_main(geom,basis)
     ! allocate(X(N,N))
     call x_finder(N,S,X)
     write(*,*) "checkpoint D"
-    ! call hermitian_conjg(N,X,X_herm)
-    X_herm = transpose(X)
 
     ! Generate guess at density matrix - initial guess is G = zero
     ! and P = zero
@@ -171,21 +188,51 @@ subroutine hf_main(geom,basis)
     ! call matrix_reader2(N,G,JK)
     ! call execute_command_line("rm -f JK")
 
-    call Compute_G(P,G)
+    call Two_Tensor(Tens)
+
+    call FORMG(Tens, G, P)
+
+    write(*,*) "G"
+    call matrix_printer(N,G)
+
 
     ! Find F = T + V + G
     11 continue
     F = H_core + G
 
+    WRITE(*,*) "F"
+    call matrix_printer(N,F)
+
+    X(1,1) = 0.5870642
+    X(2,1) = 0.5870642
+    X(1,2) = 0.9541310
+    X(2,2) = -0.9541310
+
+
     ! Transform the Fock matrix  to F'
     ! Check that using 'real' here is ok
+    X_herm = TRANSPOSE(X)
     F_prime = real(matmul(X_herm,matmul(F,X)))
 
-    ! Diagonalize (find eigvecs, vals) F' to obtain C' and epsilon
-    call eigen_finder(N,F_prime,C_prime,Ep)
+    write(*,*) "F_prime"
+    call matrix_printer(N,F_prime)
 
+    ! Diagonalize (find eigvecs, vals) F' to obtain C' and epsilon
+    !call eigen_finder(N,F_prime,C_prime,Ep)
+
+    call diagonalize(F_prime,C_prime,Ep)
+
+    write(*,*) "C_prime"
+    call matrix_printer(N,C_prime)
+
+    write(*,*) "Ep"
+    call matrix_printer(N,Ep)
+        
     ! Find C = X C' 
     C = matmul(X,C_prime)
+
+    write(*,*) "C"
+    call matrix_printer(N,C)
 
     ! Form new density matrix P from C 
     do i = 1, N
@@ -195,6 +242,9 @@ subroutine hf_main(geom,basis)
             P_new(i,j) = 2 * C(i,1) * C(j,1)
         enddo
     enddo
+
+    write(*,*) "P"
+    call matrix_printer(N,P_new)
 
     ! Determine convergence - if not then go back to 10
     diff = abs(maxval(P_new - P))
