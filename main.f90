@@ -72,6 +72,7 @@ subroutine hf_main(geom,basis)
     real, allocatable, dimension(:,:) :: C_prime
     real, allocatable, dimension(:,:) :: C_new
     real, allocatable, dimension(:,:) :: Ep
+    real, dimension(6,6,6,6) :: Tens
 
     ! Values for determining matrix convergence
     real    :: diff, conv
@@ -90,7 +91,7 @@ subroutine hf_main(geom,basis)
     S_out = "S_out"
 
     ! Set convergence tolerance
-    conv = 1e-2
+    conv = 1e-3
 
     call execute_command_line("rm -f temp_file_1")
     call execute_command_line("rm -f temp_file_2")
@@ -161,7 +162,9 @@ subroutine hf_main(geom,basis)
 
     !! use the subroutine that takes P and the two electron integrals to 
     !! find G
-    call Compute_G(P,G)
+
+    call Compute_Tensor(Tens)
+    call Compute_G(P,G,Tens)
 
     ! Find F = T + V + G
     11 continue

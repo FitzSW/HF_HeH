@@ -265,7 +265,7 @@ CONTAINS
 
 
 
-        SUBROUTINE Compute_G(P, GM)
+        SUBROUTINE Compute_G(P, GM, Ten1)
                 
                 IMPLICIT NONE
 
@@ -273,7 +273,7 @@ CONTAINS
 
                 REAL, dimension(6,6), intent(out) :: GM
 
-                REAL, dimension(6,6,6,6) :: Ten1
+                REAL, dimension(6,6,6,6), intent(in) :: Ten1
 
                 INTEGER :: mu, nu, lambda, sigma, I, J, K, L
                 
@@ -290,7 +290,7 @@ CONTAINS
                                 DO lambda = 1,6
                                         DO sigma = 1,6
 
-                                                CALL Compute_Tensor(Ten1)
+                                 
 
                                                 GM(mu,nu) = GM(mu,nu) + P(lambda,sigma) * &
                                                 (Ten1(mu,nu,sigma,lambda) &
