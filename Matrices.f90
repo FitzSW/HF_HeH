@@ -275,7 +275,14 @@ CONTAINS
 
                 REAL, dimension(6,6,6,6) :: Ten1
 
-                INTEGER :: mu, nu, lambda, sigma
+                INTEGER :: mu, nu, lambda, sigma, I, J, K, L
+                
+                
+                DO I = 1,6
+                DO J = 1,6
+                GM(I,J) = 0 
+                END DO
+                END DO
 
 
                 DO mu = 1,6
