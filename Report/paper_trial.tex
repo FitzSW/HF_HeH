@@ -69,7 +69,7 @@
 \preprint{AIP/123-QED}
 
 \title[MENG 25510 Final]{MENG 25510 Final Report:\\ Hartree-Fock on
-HeH$^{+}$ with 6-311G}
+HeH$^{+}$ with 6-311G and STO-3G}
 % Force line breaks with \\
 \author{N.\ R.\ Dohrmann and S.\ W.\ Fitz}
  % \altaffiliation{University of Chicago, The College}%Lines break automatically or can be forced with \\
@@ -90,7 +90,8 @@ for this project.
 This is a reference document to go with our submission for the MENG 25510
 final coding project, for which we chose to implement the Hartree-Fock (HF)
 Self-Consistent Field (SCF) method on a HeH$^{+}$ molecular system using the
-6-311G basis set on both atoms. The geometry at which we performed the
+6-311G basis set on both atoms for one round of calculations, and STO-3G for
+another. The geometry at which we performed the
 calculation was optimized at the CCSD/aug-cc-pZTZ level of theory using
 Gaussian 16\cite{g16}. The result of our code is then compared to an energy
 found with
@@ -110,6 +111,13 @@ First, the input geometry and basis set files are read into the main program
 the name of its host atom, the orbital angular momentum type (e.g. ``s''), the
 coordinates of the host atom, the length of the contraction, as well as arrays
 of coefficients and exponential factors for the contraction.
+
+Then, the program reads in the desired basis set (files included in the
+``Basis\_Set'' directory) as well as geometry (under ``Opt'') with subroutines
+written in the {\code reader.f90} module in order to construct the set of
+appropriate orbitals. Currently, these are changed by editing the main file,
+though geometries and basis sets could be adapted to be read in via the
+command line.
 
 From here, we then calculate the stored integrals to populate the matrices 
 $\bold{S}$, $\bold{T}$, $\left\{\bold{V}^{\text{nuc.}}\right\}$, and $\bold{TE}$,
@@ -164,13 +172,23 @@ directory, run one of the following commands:
 %
 $$ \text{{\code ./mac\_build.sh}} \hspace{0.5cm}
  \text{{\code ./midway\_build.sh}} $$
-to build and execute the project. The results of the SCF procedure will be
- written to file in {\code hf\_out.out}.
+to build and execute the project with the 6-311G basis set. The results of
+the SCF procedure will be written to file in {\code hf\_out.out}. Should you
+run into any trouble at all running this, please do not hesistate to
+reach out to us. We guarantee that the program has been tested on both Mac OS
+and Midway, but if for an unknown reason it doesn't work then let us know.
 
 \section{Results and Discussion}
-We found a final electronic energy of () with a nuclear repulsion energy of
-() for a total molecular energy of () [Ha.]. Please see a comparison of our
-results to the benchmark and PySCF values in Table \ref{tab:hf_results}.
+Encouragingly, we have found results in quite good agreement with PySCF for
+both basis sets.  Within the version of the code that uses 6-311G,
+we found a final electronic energy of  -4.28007793 with a nuclear repulsion energy
+of 1.36361289   
+for a total molecular energy of  -2.91646504 [Ha.]. Likewise, the energies
+obtained with STO-36 (listed in the same order as above) are   -4.22688007, 
+1.36686718, and -2.86001301 [Ha.]
+Please see a comparison of our
+resulting energy to the expected PySCF value and a higher-quality CCSD
+calculation  in Table \ref{tab:hf_results}. 
 
 \begin{table}[]
 \caption{HF Results Comparison on HeH$^{+}$ by Method}
@@ -180,11 +198,13 @@ results to the benchmark and PySCF values in Table \ref{tab:hf_results}.
 \hline
 \multicolumn{1}{|l|}{\textbf{Method / Data Source}} &
 \multicolumn{1}{c|}{\textbf{Bond Length\footnote{Optimzed with
-CCSD/aug-cc-pVTZ, this value used with both HF/6-311G calculations.} [Å] \ \ \ \ }} 
+CCSD/aug-cc-pVTZ, this value used with all subsequent calculations.} [Å] \ \ \ \ }} 
 & \multicolumn{1}{l|}{\textbf{Total $E_0$, [Ha.]}} \\ \hline
 CCSD/aug-cc-pVTZ\footnote{Gaussian 16}      & .776140  & -2.9753932    \\ \hline 
 HF/6-311G\footnote{PySCF}     & .776140     & -2.9164905    \\ \hline
-HF/6-311G\footnote{This Report}  & .776140  &          \\ \hline
+HF/6-311G\footnote{This Report}  & .776140  &  -2.9164650         \\ \hline
+HF/STO-3G$^{\text{c}}$ & .776140 & -2.8421947 \\ \hline
+HF/STO-3G$^{\text{d}}$ & .776140 &  -2.8600130 \\ \hline
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -192,19 +212,19 @@ HF/6-311G\footnote{This Report}  & .776140  &          \\ \hline
 
 \section{Conclusion}
 If this project were to be extended for more general use, the basis sets and
-geometries of additional systems could easily be read into the main program
-in the current state of the code. The main area for improvement that would
-have to be more thoroughly adapted are the evaluation of molecular integrals 
-involving atomic orbitals of angular momentum $l > 0$, which are much more
-complex in their evaluation than the $s$ type orbitals that are considered in
-this report. Additionally, there is further room for optimization in the
-linear algebra functionality of this project. Currently, matrices must be
-written to file, processed, and read back into the main executable at the
-start of the program and at each stage of the SCF cycle. Clearly, this is not
-the most efficient way to handle matrix computations, and an improved code
-would ideally include LAPACK functions and subroutines to be used within
-Fortran itself.
-
+geometries of additional systems could easily be read into the main program in
+the current state of the code.  The main area
+for improvement that would have to be more thoroughly adapted
+from the current state of the project are the evaluation of molecular
+integrals involving atomic orbitals of angular momentum $l > 0$, which are
+much more complex in their evaluation than the $s$ type orbitals that are
+considered in this report. Additionally, there is further room for
+optimization in the linear algebra functionality of this project. Currently,
+matrices must be written to file, processed, and read back into the main
+executable at the start of the program and at each stage of the SCF cycle.
+Clearly, this is not the most efficient way to handle matrix computations, and
+an improved code would ideally include LAPACK functions and subroutines to be
+used within Fortran itself.
 
 % \nocite{*}
 \bibliography{sources}
